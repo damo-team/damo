@@ -6,7 +6,7 @@
 
 #### →设置开发环境
 
-在构建应用之前，我们必须先设置好开发环境，如果你的机器上还没有[**Node.js®和npm**](https://nodejs.org/en/download/)，请先安装它们。
+在构建应用之前，我们必须先设置好开发环境，如果你的机器上还没有**[Node.js®和npm](https://nodejs.org/en/download/)**，请先安装它们。
 
 > 请先在终端\/控制台窗口中运行命令 `node -v` 和 `npm -v`， **来验证一下你正在运行 node**`6.9.x`** 和 npm **`3.x.x`** 以上的版本。** 更老的版本可能会出现错误，更新的版本则没问题。
 
@@ -180,20 +180,22 @@ export default class Root extends Component({
 
 1. 引入@damo\/core模块
 
-  * BaseModel数据模型基类，创建model需要继承BaseModel
+  * `BaseModel`数据模型基类，创建model需要继承BaseModel
 
-  * BaseSelector,选择器基类，创建selector需要继承BaseSelector或者RxSelector（在状态与数据绑定章节详细讲解）
+  * `BaseSelector`,选择器基类，创建selector需要继承BaseSelector或者RxSelector（在状态与数据绑定章节详细讲解）
 
-  * Api，接口调用单例。
+  * `Api`，接口调用单例。
 
   * 装饰器
-    * @initialState
-    * @dispatch
-    * @inputs
-    * @views
+
+    * `@initialState`，描述初始化状态数据
+    * `@dispatch`，描述状态数据变更函数，使其函数调用时会自动更新数据到指定状态数据。
+    * `@inputs`，描述数据绑定到视图的数据结构
+    * `@views`，描述视图需要的所有元数据，使视图按预定的程序工作。
 
 
-2. 概念：组件、数据模型、选择器和数据绑定。
+
+1. 概念：组件、数据模型、选择器和数据绑定。
 
 ### 3.0 回顾
 

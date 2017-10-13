@@ -6,7 +6,7 @@
 
 #### →设置开发环境
 
-在构建应用之前，我们必须先设置好开发环境，如果你的机器上还没有[**Node.js®和npm**](https://nodejs.org/en/download/)，请先安装它们。
+在构建应用之前，我们必须先设置好开发环境，如果你的机器上还没有**[Node.js®和npm](https://nodejs.org/en/download/)**，请先安装它们。
 
 > 请先在终端\/控制台窗口中运行命令 `node -v` 和 `npm -v`， **来验证一下你正在运行 node**`6.9.x`** 和 npm **`3.x.x`** 以上的版本。** 更老的版本可能会出现错误，更新的版本则没问题。
 
@@ -67,7 +67,7 @@ export default class Root extends Component{
 
 当你刷新浏览器，会看到修改之后的标题，可以样式改得更好看些
 
-打开app\/scenes\/index.less，并给这个组件设置一些样式：
+打开`app/scenes/index.less`，并给这个组件设置一些样式：
 
 ```
 h1 { 
@@ -79,13 +79,13 @@ h1 {
 
 ### 2.0 完成一个视图
 
-我们已经创建了一个极其简单的应用，但是我们想让应用更贴近真实情况，把`Welcome to My First React App!`改为 `Welcome to xxx`。xxx是接口返回的名称。
+我们已经创建了一个极其简单的应用，但是我们想让应用更贴近真实情况，把`Welcome to My First React App！!`改为 `Welcome to xxx`。xxx是接口返回的名称。
 
 #### →定义第一个状态数据
 
-在app\/models目录下，创建一个user的目录，并在目录下创建user.js和user.json文件
+在`app/models`目录下，创建一个user的目录，并在目录下创建`user.js`和`user.json`文件
 
-编辑user.json，写入用户的名称
+编辑`user.json`，写入用户的名称
 
 ```
 {
@@ -98,7 +98,7 @@ h1 {
 
 #### →保存接口数据到状态数据
 
-打开user.js文件，创建描述状态数据的数据模型User。
+打开`user.js`文件，创建描述状态数据的数据模型`User`。
 
     import {BaseModel, Api} from '@damo/core`; 
     export defualt class User extends BaseModel{ 
@@ -117,9 +117,9 @@ h1 {
         } 
     }
 
-User模型类做了2个事情，通过@initialState描述了状态数据的初始化结构，@dispatch描述更改状态数据的方法调用。其中@initialState和@dispatch都是装饰器，装饰器是用来描述JS类以及其属性，使其按框架预设的逻辑来执行。
+User模型类做了2个事情，通过`@initialState`描述了状态数据的初始化结构，`@dispatch`描述更改状态数据的方法调用。其中`@initialState`和`@dispatch`都是装饰器，装饰器是用来描述JS类以及其属性，使其按框架预设的逻辑来执行。
 
-至于BaseModel类的getQuery方法，我们先理解为创建一个状态容器的询问语句，如果最终语句执行成功后，会变更状态容器中的指定数据。数据模型与状态管理的章节会详细介绍。
+至于`BaseModel`类的`getQuery`方法，我们先理解为创建一个状态容器的询问语句，如果最终语句执行成功后，会变更状态容器中的指定数据。数据模型与状态管理的章节会详细介绍。
 
 这一步以及往下看迷茫的话，可以结合概念关系图来理解下，学习基础概念参考[自述]()章节：
 
@@ -127,7 +127,7 @@ User模型类做了2个事情，通过@initialState描述了状态数据的初�
 
 #### →获取状态数据
 
-在app\/scenes目录下创建selector.js，并且编辑它。
+在`app/scenes`目录下创建`selector.js`，并且编辑它。
 
 ```
 import {BaseSelector} from '@damo/core';
@@ -143,13 +143,15 @@ export default class Selector extends BaseSelector{
 }
 ```
 
-创建一个选择器selector，用来从状态容器中获取指定状态数据，以便后续通过数据绑定到视图。
+创建一个选择器`selector`，用来从状态容器中获取指定状态数据，以便后续通过数据绑定到视图。`@inputs`描述获取到的指定状态数据处理过后，最终数据绑定到视图的数据结构，这样视图中通过`this.props`可以获取绑定的数据。
+
+当视图开始工作时，`Selector`的`initialize`钩子函数会自动执行，`initialize`中通过`BaseSelector`的`getModel`方法获取User实例，从而调用getUser方法获取用户名称，与此同时数据绑定到视图的数据结构也会重新更新，视图中this.props获取的数据是最新更新的数据，视图会重新的渲染。
 
 #### →数据绑定
 
-要绑定状态数据到组件，需要借助于装饰器，把selector和组件串通起来。
+要绑定状态数据到组件，需要借助于装饰器`@view`，把`selector`和组件串通起来。
 
-编辑app\/scens\/index.jsx
+编辑`app/scens/index.jsx`
 
 ```
 import {Component} from 'react';
@@ -172,7 +174,7 @@ export default class Root extends Component({
 });
 ```
 
-可以看到Root组件定义部分并没有改动，只是添加了装饰器@view，通过@view，把视图相关的元数据selector，注入Selector类来达到把状态数据绑定到组件中。
+可以看到Root组件定义部分并没有改动，只是添加了装饰器`@view`，通过`@view`，把视图相关的元数据`selector`，注入`Selector`类来达到把状态数据绑定到组件中。
 
 ### 3.0 回顾
 

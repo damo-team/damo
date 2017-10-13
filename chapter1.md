@@ -6,11 +6,21 @@
 
 #### →设置开发环境
 
-在构建应用之前，我们必须先设置好开发环境，如果你的机器上还没有[**Node.js®和npm**](https://nodejs.org/en/download/)，请先安装它们。
+在构建应用之前，我们必须先设置好开发环境，如果你的机器上还没有**[Node.js®和npm](https://nodejs.org/en/download/)**，请先安装它们。
 
 > 请先在终端\/控制台窗口中运行命令 `node -v` 和 `npm -v`， **来验证一下你正在运行 node**`6.9.x`** 和 npm **`3.x.x`** 以上的版本。** 更老的版本可能会出现错误，更新的版本则没问题。
 
+然后全局安装Damo CLI
+
+```
+npm install @damo/cli
+```
+
+推荐安装[vscode编辑器](https://code.visualstudio.com/)，并安装插件：\`auto import\`, \`join-lines\`, \`react-beautify\`, \`editor config for vscode\`, \`@damo\/react-kit\`.
+
 #### →创建新项目
+
+
 
 #### →启动开发服务器
 

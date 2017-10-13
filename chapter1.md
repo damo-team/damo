@@ -6,7 +6,7 @@
 
 #### →设置开发环境
 
-在构建应用之前，我们必须先设置好开发环境，如果你的机器上还没有**[Node.js®和npm](https://nodejs.org/en/download/)**，请先安装它们。
+在构建应用之前，我们必须先设置好开发环境，如果你的机器上还没有[**Node.js®和npm**](https://nodejs.org/en/download/)，请先安装它们。
 
 > 请先在终端\/控制台窗口中运行命令 `node -v` 和 `npm -v`， **来验证一下你正在运行 node**`6.9.x`** 和 npm **`3.x.x`** 以上的版本。** 更老的版本可能会出现错误，更新的版本则没问题。
 
@@ -45,12 +45,13 @@ damo serve --open
 
 #### →编辑第一个React组件
 
-Damo-CLI为我们创建了第一个React组件 - `app-root` 的跟组件，你可以打开`app/appRoot.jsx`来看。
+Damo-CLI为我们创建了第一个React组件 - 根组件，你可以打开`app/scenes/index.jsx`来看。
 
-我们打开`appRoot.jsx`，并把title属性从`Welcome to App!` 改为 `Welcome to My First React App!`
+我们打开`index.jsx`，并把title属性从`Welcome to App!` 改为 `Welcome to My First React App!`
 
 ```
-export default class AppRoot{
+import {Component} from 'react';
+export default class Root extends Component{
     defaultProps = {
         title: 'My First React App';
     }
@@ -62,7 +63,7 @@ export default class AppRoot{
 
 当你刷新浏览器，会看到修改之后的标题，可以样式改得更好看些
 
-打开app\/app.css，并给这个组件设置一些样式：
+打开app\/scenes\/index.less，并给这个组件设置一些样式：
 
 ```
 h1 { 
@@ -112,7 +113,49 @@ h1 {
         } 
     }
 
+#### →获取状态数据
+
+在app\/scenes目录下创建selector.js，并且编辑它
+
+```
+import {BaseSelector} from '@damo/core';
+export default class RootSelector extends BaseSelector{
+    @inputs props(state){
+        return {
+            title: state.user.name
+        }
+    }
+    initialize(){
+        this.getModel('user').getUser();
+    }
+}
+```
+
 #### →数据绑定
+
+要绑定状态数据到组件，需要借助于装饰器，把selector和组件串通起来。
+
+编辑app\/scens\/index.jsx
+
+```
+import {Component} from 'react';
+import {view} from '@damo/core';
+import Selector from './selector';
+import './index.less';
+@view({
+    selector: Selector
+})
+export default class Root extends Component({
+    defaultProps = {
+        title: 'My First React App'
+    }
+    render(){
+        return (<h1>Welcome to {this.props.title}</h1>);
+    }
+});
+```
+
+可以看到Root组件定义部分并没有改动，只是添加了装饰器@view，通过@view，把视图相关的元数据selector，注入Selector类来达到把状态数据绑定到组件中。
 
 ### 3.0 回顾
 

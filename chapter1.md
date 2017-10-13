@@ -6,7 +6,7 @@
 
 #### →设置开发环境
 
-在构建应用之前，我们必须先设置好开发环境，如果你的机器上还没有**[Node.js®和npm](https://nodejs.org/en/download/)**，请先安装它们。
+在构建应用之前，我们必须先设置好开发环境，如果你的机器上还没有[**Node.js®和npm**](https://nodejs.org/en/download/)，请先安装它们。
 
 > 请先在终端\/控制台窗口中运行命令 `node -v` 和 `npm -v`， **来验证一下你正在运行 node**`6.9.x`** 和 npm **`3.x.x`** 以上的版本。** 更老的版本可能会出现错误，更新的版本则没问题。
 
@@ -74,9 +74,30 @@ h1 {
 
 ### 2.0 完成一个视图
 
-我们已经创建了一个极其简单的应用，但是我们想让应用更贴近真实情况，把`Welcome to My First React App! `改为 `Welcome to xxx`。xxx是接口返回的名称。
+我们已经创建了一个极其简单的应用，但是我们想让应用更贴近真实情况，把`Welcome to My First React App!`改为 `Welcome to xxx`。xxx是接口返回的名称。
 
 #### →定义第一个状态数据
+
+在app\/models目录下，创建一个user的目录，并在目录下创建user.js和user.json文件
+
+打开user.js文件，创建描述状态数据的数据模型User
+
+    import {BaseModel, Api, } from '@damo/core`;
+    export defualt class User extends BaseModel{
+        @initialState properties = {
+            user: {}
+        }
+        @dispatch getUser(){
+            return this.getQuery({
+                request: Api.get('http://localhost:8009/app/models/user/user.json'),
+                processData: (res) => res.data,
+                change: {
+                    type: BaseModel.ASSIGN_METHODS.PURE
+                    name: 'user'
+                }
+            });
+        }
+    }
 
 #### →保存数据接口到状态数据
 

@@ -75,7 +75,7 @@ Damo框架包括前端应用开发所用到的一系列库，有些是核心库�
 
 4. 模板JSX，模板是React提供的JSX语法，使得开发者可以想编写HTML标签的方式来描述视图的结构。所以编写JSX就像是附加了几个特殊语法糖的HTML代码（比如{}是用来嵌套子JSX结构或者JavaScript代码），JSX的了解参考[React](http://www.runoob.com/react/react-tutorial.html)
 
-5. 服务service
+5. 服务service，服务是一段特定的JS代码逻辑，
 
 6. 视图view
 

@@ -178,7 +178,7 @@ export default class Root extends Component({
 
 总结下出现了哪些新东西：
 
-1. 引入@damo\/core模块
+1. 引入`@damo/core`模块
 
   * `BaseModel`数据模型基类，创建model需要继承BaseModel
 

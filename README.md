@@ -91,11 +91,9 @@ Damo框架包括前端应用开发所用到的一系列库，有些是核心库�
 
 ### 先前技术
 
-1. React
+1. React, React是一个用于构建用户界面的JavaScript库，是一套高性能的组件框架。
 
-2. Redux
-3. Rx
-4. Flux
+2. Redux，Redux可以理解为Flux模式的一种实现，弱化了dispatcher的概念，强化了reducer概念。Redux是JavaScript状态容器，对应用提供可与预测化的状态管理。
 
-5. Elm
+3. Rx，RxJS是基于响应式编程实现的JavaScript高性能库，提供管理复杂异步应用非常优秀的方案，RxJS是一个包含丰富数据变换的函数库。
 

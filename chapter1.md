@@ -57,7 +57,10 @@ export default class Root extends Component{
         title: 'My First React App!!';
     }
     render(){
-        return (<h1>Welcome to {this.props.title}</h1>);
+        return (<div>
+            <h1>Welcome to {this.props.title}</h1>
+            <img src="https://baqian.gitbooks.io/damo/content/assets/brand.png"/>
+        </div>);
     }
 }
 ```

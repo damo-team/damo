@@ -6,7 +6,7 @@
 
 #### →设置开发环境
 
-在构建应用之前，我们必须先设置好开发环境，如果你的机器上还没有**[Node.js®和npm](https://nodejs.org/en/download/)**，请先安装它们。
+在构建应用之前，我们必须先设置好开发环境，如果你的机器上还没有[**Node.js®和npm**](https://nodejs.org/en/download/)，请先安装它们。
 
 > 请先在终端\/控制台窗口中运行命令 `node -v` 和 `npm -v`， **来验证一下你正在运行 node**`6.9.x`** 和 npm **`3.x.x`** 以上的版本。** 更老的版本可能会出现错误，更新的版本则没问题。
 
@@ -45,7 +45,7 @@ damo serve --open
 
 #### →编辑第一个React组件
 
-Damo-CLI为我们创建了第一个React组件 - `app-root` 的跟组件，你可以打开`./src/app/appRoot.jsx`来看。
+Damo-CLI为我们创建了第一个React组件 - `app-root` 的跟组件，你可以打开`app/appRoot.jsx`来看。
 
 我们打开`appRoot.jsx`，并把title属性从`Welcome to App!` 改为 `Welcome to My First React App!`
 
@@ -57,6 +57,18 @@ export default class AppRoot{
     render(){
         return (<h1>Welcome to {this.props.title}</h1>);
     }
+}
+```
+
+当你刷新浏览器，会看到修改之后的标题，可以样式改得更好看些
+
+打开app\/app.css，并给这个组件设置一些样式：
+
+```
+h1 { 
+    color: #369; 
+    font-family: Arial, Helvetica, sans-serif; 
+    font-size: 250%; 
 }
 ```
 

@@ -6,7 +6,7 @@
 
 #### →设置开发环境
 
-在构建应用之前，我们必须先设置好开发环境，如果你的机器上还没有[**Node.js®和npm**](https://nodejs.org/en/download/)，请先安装它们。
+在构建应用之前，我们必须先设置好开发环境，如果你的机器上还没有**[Node.js®和npm](https://nodejs.org/en/download/)**，请先安装它们。
 
 > 请先在终端\/控制台窗口中运行命令 `node -v` 和 `npm -v`， **来验证一下你正在运行 node**`6.9.x`** 和 npm **`3.x.x`** 以上的版本。** 更老的版本可能会出现错误，更新的版本则没问题。
 
@@ -79,25 +79,6 @@ h1 {
 #### →定义第一个状态数据
 
 在app\/models目录下，创建一个user的目录，并在目录下创建user.js和user.json文件
-
-打开user.js文件，创建描述状态数据的数据模型User
-
-    import {BaseModel, Api, } from '@damo/core`;
-    export defualt class User extends BaseModel{
-        @initialState properties = {
-            user: {}
-        }
-        @dispatch getUser(){
-            return this.getQuery({
-                request: Api.get('http://localhost:8009/app/models/user/user.json'),
-                processData: (res) => res.data,
-                change: {
-                    type: BaseModel.ASSIGN_METHODS.PURE
-                    name: 'user'
-                }
-            });
-        }
-    }
 
 编辑user.json，写入用户的名称
 

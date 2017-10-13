@@ -60,7 +60,7 @@ Damo框架包括前端应用开发所用到的一系列库，有些是核心库�
 
 3. 数据模型model, 模型是声明一个状态state到状态容器的JS类，该JS类包含state的初始化结构和描述state变化的调用方法。
 
-4. 模板JSX，模板是React提供的JSX语法，使得开发者可以像编写HTML标签的方式来描述视图的结构。简单来解释的话，JSX就像是附加了几个特殊语法的HTML代码（比如：附加的{}是用来嵌套子JSX结构或者JavaScript代码），JSX的了解参考[React](http://www.runoob.com/react/react-tutorial.html)
+4. 模板JSX，模板是React提供的JSX语法，使得开发者可以像编写HTML标签的方式来描述视图的结构。简单来解释的话，JSX就像是附加了几个特殊语法的HTML代码（比如：附加的{}是用来嵌套JSX子结构或者JavaScript表达式），JSX的了解参考[React](http://www.runoob.com/react/react-tutorial.html)
 
 5. 组件component，组件是包含了模板jsx的特殊HTML标签（被React描述为HTML标签，真实情况是通过Damo CLI编译为调用DOM接口的JavaScript函数，从而达到创建HTML标签的效果，后续统一称之为JSX）
 

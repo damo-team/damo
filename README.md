@@ -27,8 +27,12 @@ Damo框架包括前端应用开发所用到的一系列库，有些是核心库�
 #### 速度与性能
 
 1. 代码拆分
-  借助React-Router(http://react-guide.github.io/react-router-cn/docs/API.html)路由器以及CLI命令行工具，Damo可以实现快速加载。自动代码拆分机制可以让用户仅仅加载哪些用于渲染所请求页面的代码。
+  借助[React-Router](http://react-guide.github.io/react-router-cn/docs/API.html)路由器以及CLI命令行工具，Damo可以实现快速加载。自动代码拆分机制可以让用户仅仅加载哪些用于渲染所请求页面的代码。
+
 2. 安全与统一
+  借助React的安全机制，解决应用构建遇到的安全问题。
+  JavaScript虚拟机进行高度优化，轻松获得框架提供的高生产率，同时又能保留所有手写代码的优点。
+
 
 #### 完整的开发故事
 

@@ -62,7 +62,7 @@ Damo框架包括前端应用开发所用到的一系列库，有些是核心库�
 
 4. 模板JSX，模板是React提供的JSX语法，使得开发者可以像编写HTML标签的方式来描述视图的结构。简单来解释的话，JSX就像是附加了几个特殊语法的HTML代码（比如：附加的{}是用来嵌套JSX子结构或者JavaScript表达式），了解JSX可参考[React](http://www.runoob.com/react/react-tutorial.html)
 
-5. 组件component，组件是包含了模板JSX的一种特殊自定义HTML标签。（组件是一种虚拟标签ShadowDOM，使用和HTML一样简单，内部包含了真实的HTML结构）
+5. 组件component，组件是包含了模板JSX的一种特殊自定义HTML标签。（组件是一种虚拟标签ShadowDOM，使用和HTML一样简单，其内部包含了真实的HTML结构）
 
 6. 服务service，服务是一段特定的JS代码逻辑，不引用到外部的对象，可以单独执行。服务是用来完成一件特定的事情，比如表格数据的静态排序，那么这个服务实际上是在调用时传入表格数据，排序好后，返回新的表格数据，最终表格组件拿新的表格数据进行渲染。
 

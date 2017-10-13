@@ -16,11 +16,9 @@
 npm install @damo/cli
 ```
 
-推荐安装[vscode编辑器](https://code.visualstudio.com/)，并安装插件：\`auto import\`, \`join-lines\`, \`react-beautify\`, \`editor config for vscode\`, \`@damo\/react-kit\`.
+推荐安装[vscode编辑器](https://code.visualstudio.com/)，并安装插件：`auto import`, `join-lines`, `react-beautify`, `editor config for vscode`, ~~`@damo/react-kit`~~。
 
 #### →创建新项目
-
-
 
 #### →启动开发服务器
 

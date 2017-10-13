@@ -6,7 +6,7 @@
 
 #### →设置开发环境
 
-在构建应用之前，我们必须先设置好开发环境，如果你的机器上还没有**[Node.js®和npm](https://nodejs.org/en/download/)**，请先安装它们。
+在构建应用之前，我们必须先设置好开发环境，如果你的机器上还没有[**Node.js®和npm**](https://nodejs.org/en/download/)，请先安装它们。
 
 > 请先在终端\/控制台窗口中运行命令 `node -v` 和 `npm -v`， **来验证一下你正在运行 node**`6.9.x`** 和 npm **`3.x.x`** 以上的版本。** 更老的版本可能会出现错误，更新的版本则没问题。
 
@@ -119,13 +119,15 @@ h1 {
 
 User模型类做了2个事情，通过@initialState描述了状态数据的初始化结构，@dispatch描述更改状态数据的方法调用。其中@initialState和@dispatch都是装饰器，装饰器是用来描述JS类以及其属性，使其按框架预设的逻辑来执行。
 
+至于BaseModel类的getQuery方法，我们先理解为创建一个状态容器的询问语句，如果最终语句执行成功后，会变更状态容器中的指定数据。数据模型与状态管理的章节会详细介绍。
+
 这一步以及往下看迷茫的话，可以结合概念关系图来理解下，学习基础概念参考[自述]()章节：
 
 ![架构](/assets/屏幕快照 2017-10-13 16.55.25.png)
 
 #### →获取状态数据
 
-在app\/scenes目录下创建selector.js，并且编辑它
+在app\/scenes目录下创建selector.js，并且编辑它。
 
 ```
 import {BaseSelector} from '@damo/core';
@@ -140,6 +142,8 @@ export default class Selector extends BaseSelector{
     }
 }
 ```
+
+创建一个选择器selector，用来从状态容器中获取指定状态数据，以便后续通过数据绑定到视图。
 
 #### →数据绑定
 

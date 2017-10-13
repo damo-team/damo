@@ -6,7 +6,7 @@
 
 #### →设置开发环境
 
-在构建应用之前，我们必须先设置好开发环境，如果你的机器上还没有[**Node.js®和npm**](https://nodejs.org/en/download/)，请先安装它们。
+在构建应用之前，我们必须先设置好开发环境，如果你的机器上还没有**[Node.js®和npm](https://nodejs.org/en/download/)**，请先安装它们。
 
 > 请先在终端\/控制台窗口中运行命令 `node -v` 和 `npm -v`， **来验证一下你正在运行 node**`6.9.x`** 和 npm **`3.x.x`** 以上的版本。** 更老的版本可能会出现错误，更新的版本则没问题。
 
@@ -116,10 +116,12 @@ h1 {
             }); 
         } 
     }
+
+User模型类做了2个事情，通过@initialState描述了状态数据的初始化结构，@dispatch描述更改状态数据的方法调用。其中@initialState和@dispatch都是装饰器，装饰器是用来描述JS类以及其属性，使其按框架预设的逻辑来执行。
+
 这一步以及往下看迷茫的话，可以结合概念关系图来理解下，学习基础概念参考[自述]()章节：
 
 ![架构](/assets/屏幕快照 2017-10-13 16.55.25.png)
-
 
 #### →获取状态数据
 
@@ -127,7 +129,7 @@ h1 {
 
 ```
 import {BaseSelector} from '@damo/core';
-export default class RootSelector extends BaseSelector{
+export default class Selector extends BaseSelector{
     @inputs props(state){
         return {
             title: state.user.name

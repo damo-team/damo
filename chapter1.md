@@ -6,7 +6,7 @@
 
 #### →设置开发环境
 
-在构建应用之前，我们必须先设置好开发环境，如果你的机器上还没有**[Node.js®和npm](https://nodejs.org/en/download/)**，请先安装它们。
+在构建应用之前，我们必须先设置好开发环境，如果你的机器上还没有[**Node.js®和npm**](https://nodejs.org/en/download/)，请先安装它们。
 
 > 请先在终端\/控制台窗口中运行命令 `node -v` 和 `npm -v`， **来验证一下你正在运行 node**`6.9.x`** 和 npm **`3.x.x`** 以上的版本。** 更老的版本可能会出现错误，更新的版本则没问题。
 
@@ -168,8 +168,9 @@ import './index.less';
 @View({
     selector: Selector
 })
-export default class Root extends Component({
-    defaultProps = {
+export default class Root extends Component{
+    static routePath = '/';
+    static defaultProps = {
         title: 'My First React App!!'
     }
     render(){
@@ -178,7 +179,7 @@ export default class Root extends Component({
             <img src="/brand.png" />
         </div>);
     }
-});
+};
 ```
 
 可以看到Root组件定义部分并没有改动，只是添加了装饰器`@View`，通过`@View`，把视图相关的元数据`selector`，注入`Selector`类来达到把状态数据绑定到组件中。

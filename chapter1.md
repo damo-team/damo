@@ -221,7 +221,31 @@ DAMO CLI项目是做快速试验和开发企业解决方案的基础。如果你
 
 文件夹中。 所有的Damo组件、模板、样式、图片以及你的应用所需的任何东西都在那里。 这个文件夹之外的文件都是为构建应用提供支持用的。
 
+![](/assets/app-structure.png)
+
+| File文件 | Purpose用途 |
+| :--- | :--- |
+| app.{jsx, less} | 应用代码入口，把界面根容器挂到具体的页面DOM |
+| scenes/index.{jsx, less} | 应用界面中的容器组件 |
+| scenes/\*/index.{jsx, less} | 路由页面的容器组件。 |
+| models/\*.js | 描述状态数据的数据模型类 |
+| services/\*.js | 服务类 |
+
 #### →根目录下其他文件
+
+app目录是应用开发代码，外层的根目录还需要包含项目开发管理的描述配置文件。
+
+![](/assets/root_structure.png)
+
+| File文件 | Purpos用途 |
+| :--- | :--- |
+| config.build.json | 应用打包配置文件 |
+| config.dev.json | 应用开发配置文件 |
+| index.html | HTML文档文件 |
+| .editorconfig | vscode编码风格设置 |
+| jsconfig.json | js文件ES编码规范 |
+| package.json | 项目包管理文件 |
+| README.md | 项目帮助文档 |
 
 
 

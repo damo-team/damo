@@ -6,7 +6,7 @@
 
 #### →设置开发环境
 
-在构建应用之前，我们必须先设置好开发环境，如果你的机器上还没有**[Node.js®和npm](https://nodejs.org/en/download/)**，请先安装它们。
+在构建应用之前，我们必须先设置好开发环境，如果你的机器上还没有[**Node.js®和npm**](https://nodejs.org/en/download/)，请先安装它们。
 
 > 请先在终端\/控制台窗口中运行命令 `node -v` 和 `npm -v`， **来验证一下你正在运行 node**`6.9.x`** 和 npm **`3.x.x`** 以上的版本。** 更老的版本可能会出现错误，更新的版本则没问题。
 
@@ -140,7 +140,7 @@ import {BaseSelector, Input} from 'damo-core';
 export default class Selector extends BaseSelector{
     @Input() 
     title(state){
-        return state.user.name;
+        return state.user.profile.name;
     }
     initialize(){
         this.getModel('user').getUser();

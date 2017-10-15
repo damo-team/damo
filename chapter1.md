@@ -6,7 +6,7 @@
 
 #### →设置开发环境
 
-在构建应用之前，我们必须先设置好开发环境，如果你的机器上还没有**[Node.js®和npm](https://nodejs.org/en/download/)**，请先安装它们。
+在构建应用之前，我们必须先设置好开发环境，如果你的机器上还没有[**Node.js®和npm**](https://nodejs.org/en/download/)，请先安装它们。
 
 > 请先在终端\/控制台窗口中运行命令 `node -v` 和 `npm -v`， **来验证一下你正在运行 node**`6.9.x`** 和 npm **`3.x.x`** 以上的版本。** 更老的版本可能会出现错误，更新的版本则没问题。
 
@@ -100,21 +100,26 @@ h1 {
 
 打开`user.js`文件，创建描述状态数据的数据模型`User`。
 
-    import {BaseModel, Api, initialState, dispatch} from 'damo-core`; 
-    export defualt class User extends BaseModel{ 
-        @initialState user = {};
+```
+ import {BaseModel, Api, initialState, dispatch} from 'damo-core'; 
+    export default class User extends BaseModel{
 
-        @dispatch getUser(){ 
-            return this.getQuery({ 
-                uri: '', 
-                processData: (res) => res.data, 
-                change: { 
-                    type: BaseModel.ASSIGN_METHODS.PURE,
-                    name: 'user' 
-                } 
-            }); 
-        } 
+    @initialState profile = {};
+
+    @dispatch getUser(){
+       return this.getQuery({
+           uri: 'http://localhost:8009/app/models/user/user.json',
+           method: 'get',
+           processData: (res =&gt; {
+               return res.data;
+           }),
+           change: {
+               type: BaseModel.ASSIGN_TYPES.RECONFIGURE,
+               name: 'profile'
+           }
+       });
     }
+}
 
 User模型类做了2个事情，通过`@initialState`描述了状态数据的初始化结构，`@dispatch`描述更改状态数据的方法调用。其中`@initialState`和`@dispatch`都是装饰器，装饰器是用来描述JS类以及其属性，使其按框架预设的逻辑来执行。
 

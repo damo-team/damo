@@ -102,7 +102,7 @@ h1 {
 
 ```
  import {BaseModel, Api, initialState, dispatch} from 'damo-core'; 
- 
+
  export default class User extends BaseModel{
 
     @initialState profile = {};
@@ -159,8 +159,9 @@ export default class Selector extends BaseSelector{
 编辑`app/scens/index.jsx`
 
 ```
-import {Component} from 'react';
-import {view} from 'damo-core';
+import React, {Component, PropTypes} from "react"; 
+import ReactDOM from 'react-dom';
+import {View} from 'damo-core';  
 import Selector from './selector';
 import './index.less';
 @View({

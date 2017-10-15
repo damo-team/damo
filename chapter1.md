@@ -102,7 +102,8 @@ h1 {
 
 ```
  import {BaseModel, Api, initialState, dispatch} from 'damo-core'; 
-    export default class User extends BaseModel{
+ 
+ export default class User extends BaseModel{
 
     @initialState profile = {};
 

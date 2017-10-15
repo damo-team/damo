@@ -102,9 +102,8 @@ h1 {
 
     import {BaseModel, Api} from 'damo-core`; 
     export defualt class User extends BaseModel{ 
-        @initialState properties = { 
-            user: {} 
-        } 
+        @initialState user = {};
+ 
         @dispatch getUser(){ 
             return this.getQuery({ 
                 request: Api.get('http://localhost:8009/app/models/user/user.json'), 
@@ -133,10 +132,8 @@ User模型类做了2个事情，通过`@initialState`描述了状态数据的初
 import {BaseSelector} from 'damo-core';
 export default class Selector extends BaseSelector{
     @Input() 
-    props(state){
-        return {
-            title: state.user.name
-        }
+    title(state){
+        return state.user.name;
     }
     initialize(){
         this.getModel('user').getUser();

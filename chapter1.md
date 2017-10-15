@@ -6,7 +6,7 @@
 
 #### →设置开发环境
 
-在构建应用之前，我们必须先设置好开发环境，如果你的机器上还没有[**Node.js®和npm**](https://nodejs.org/en/download/)，请先安装它们。
+在构建应用之前，我们必须先设置好开发环境，如果你的机器上还没有**[Node.js®和npm](https://nodejs.org/en/download/)**，请先安装它们。
 
 > 请先在终端\/控制台窗口中运行命令 `node -v` 和 `npm -v`， **来验证一下你正在运行 node**`6.9.x`** 和 npm **`3.x.x`** 以上的版本。** 更老的版本可能会出现错误，更新的版本则没问题。
 
@@ -59,7 +59,7 @@ export default class Root extends Component{
     render(){
         return (<div>
             <h1>Welcome to {this.props.title}</h1>
-            <img src="https://baqian.gitbooks.io/damo/content/assets/brand.png" />
+            <img src="/brand.png" />
         </div>);
     }
 }
@@ -100,13 +100,13 @@ h1 {
 
 打开`user.js`文件，创建描述状态数据的数据模型`User`。
 
-    import {BaseModel, Api} from 'damo-core`; 
+    import {BaseModel, Api, initialState, dispatch} from 'damo-core`; 
     export defualt class User extends BaseModel{ 
         @initialState user = {};
- 
+
         @dispatch getUser(){ 
             return this.getQuery({ 
-                request: Api.get('http://localhost:8009/app/models/user/user.json'), 
+                uri: '', 
                 processData: (res) => res.data, 
                 change: { 
                     type: BaseModel.ASSIGN_METHODS.PURE,
@@ -166,7 +166,7 @@ export default class Root extends Component({
     render(){
         return (<div>
             <h1>Welcome to {this.props.title}</h1>
-            <img src="https://baqian.gitbooks.io/damo/content/assets/brand.png" />
+            <img src="/brand.png" />
         </div>);
     }
 });
@@ -190,7 +190,10 @@ export default class Root extends Component({
     * `@dispatch`，描述状态数据变更函数，使其函数调用时会自动更新数据到指定状态数据。
     * `@Input`，描述数据绑定到视图的数据结构
     * `@View`，描述视图需要的所有元数据，使视图按预定的程序工作。
-2. 概念：组件、数据模型、选择器和数据绑定。
+
+
+
+1. 概念：组件、数据模型、选择器和数据绑定。
 
 ### 3.0 回顾
 

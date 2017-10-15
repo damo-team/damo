@@ -6,7 +6,7 @@
 
 #### →设置开发环境
 
-在构建应用之前，我们必须先设置好开发环境，如果你的机器上还没有**[Node.js®和npm](https://nodejs.org/en/download/)**，请先安装它们。
+在构建应用之前，我们必须先设置好开发环境，如果你的机器上还没有[**Node.js®和npm**](https://nodejs.org/en/download/)，请先安装它们。
 
 > 请先在终端\/控制台窗口中运行命令 `node -v` 和 `npm -v`， **来验证一下你正在运行 node**`6.9.x`** 和 npm **`3.x.x`** 以上的版本。** 更老的版本可能会出现错误，更新的版本则没问题。
 
@@ -28,7 +28,7 @@ npm install -g damo-cli
     // 你也可以通过vscode打开my-app目录，然后control + `打开编辑器中的终端窗口，运行: damo init
 
 > 请耐心等待。 创建新项目需要花费很多时间，大多数时候都是在安装那些npm包。
-> 
+>
 > 创建项目成功后，会在根目录下创建应用目录结构和相关应用描述文件。
 
 #### →启动开发服务器
@@ -188,20 +188,18 @@ export default class Root extends Component{
 
 1. 引入`damo-core`模块
 
-  * `BaseModel`数据模型基类，创建model需要继承BaseModel
+   * `BaseModel`数据模型基类，创建model需要继承BaseModel
 
-  * `BaseSelector`,选择器基类，创建selector需要继承BaseSelector或者RxSelector（在状态与数据绑定章节详细讲解）
+   * `BaseSelector`,选择器基类，创建selector需要继承BaseSelector或者RxSelector（在状态与数据绑定章节详细讲解）
 
-  * `Api`，接口调用单例。
+   * `Api`，接口调用单例。
 
-  * 装饰器
+   * 装饰器
 
-    * `@initialState`，描述初始化状态数据
-    * `@dispatch`，描述状态数据变更函数，使其函数调用时会自动更新数据到指定状态数据。
-    * `@Input`，描述数据绑定到视图的数据结构
-    * `@View`，描述视图需要的所有元数据，使视图按预定的程序工作。
-
-
+     * `@initialState`，描述初始化状态数据
+     * `@dispatch`，描述状态数据变更函数，使其函数调用时会自动更新数据到指定状态数据。
+     * `@Input`，描述数据绑定到视图的数据结构
+     * `@View`，描述视图需要的所有元数据，使视图按预定的程序工作。
 
 1. 概念：组件、数据模型、选择器和数据绑定。
 
@@ -209,7 +207,9 @@ export default class Root extends Component{
 
 #### →项目文件概览
 
-#### →src文件夹
+#### →app文件夹
 
 #### →根目录下其他文件
+
+
 

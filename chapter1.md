@@ -175,7 +175,7 @@ export default class Root extends Component({
 });
 ```
 
-可以看到Root组件定义部分并没有改动，只是添加了装饰器`@view`，通过`@view`，把视图相关的元数据`selector`，注入`Selector`类来达到把状态数据绑定到组件中。
+可以看到Root组件定义部分并没有改动，只是添加了装饰器`@View`，通过`@View`，把视图相关的元数据`selector`，注入`Selector`类来达到把状态数据绑定到组件中。
 
 总结下出现了哪些新东西：
 

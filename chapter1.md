@@ -13,10 +13,10 @@
 然后全局安装Damo CLI
 
 ```
-npm install @damo/cli
+npm install -g damo-cli
 ```
 
-推荐安装[vscode编辑器](https://code.visualstudio.com/)，并安装插件：`auto import`, `join-lines`, `react-beautify`, `editor config for vscode`, `@damo/react-kit`。
+推荐安装[vscode编辑器](https://code.visualstudio.com/)，并安装插件：`auto import`, `join-lines`, `react-beautify`, `editor config for vscode`, `damo-antd`。
 
 #### →创建新项目
 
@@ -100,7 +100,7 @@ h1 {
 
 打开`user.js`文件，创建描述状态数据的数据模型`User`。
 
-    import {BaseModel, Api} from '@damo/core`; 
+    import {BaseModel, Api} from 'damo-core`; 
     export defualt class User extends BaseModel{ 
         @initialState properties = { 
             user: {} 
@@ -130,9 +130,10 @@ User模型类做了2个事情，通过`@initialState`描述了状态数据的初
 在`app/scenes`目录下创建`selector.js`，并且编辑它。
 
 ```
-import {BaseSelector} from '@damo/core';
+import {BaseSelector} from 'damo-core';
 export default class Selector extends BaseSelector{
-    @inputs props(state){
+    @Input() 
+    props(state){
         return {
             title: state.user.name
         }
@@ -143,22 +144,22 @@ export default class Selector extends BaseSelector{
 }
 ```
 
-创建一个选择器`selector`，用来从状态容器中获取指定状态数据，以便后续通过数据绑定到视图。`@inputs`描述获取到的指定状态数据处理过后，最终数据绑定到视图的数据结构，这样视图中通过`this.props`可以获取绑定的数据。
+创建一个选择器`selector`，用来从状态容器中获取指定状态数据，以便后续通过数据绑定到视图。`@Input`描述获取到的指定状态数据处理过后，最终数据绑定到视图的数据结构，这样视图中通过`this.props`可以获取绑定的数据。
 
 当视图开始工作时，`Selector`的`initialize`钩子函数会自动执行，`initialize`中通过`BaseSelector`的`getModel`方法获取User实例，从而调用getUser方法获取用户名称，与此同时数据绑定到视图的数据结构也会重新更新，视图中this.props获取的数据是最新更新的数据，视图会重新的渲染。
 
 #### →数据绑定
 
-要绑定状态数据到组件，需要借助于装饰器`@view`，把`selector`和组件串通起来。
+要绑定状态数据到组件，需要借助于装饰器`@View`，把`selector`和组件串通起来。
 
 编辑`app/scens/index.jsx`
 
 ```
 import {Component} from 'react';
-import {view} from '@damo/core';
+import {view} from 'damo-core';
 import Selector from './selector';
 import './index.less';
-@view({
+@View({
     selector: Selector
 })
 export default class Root extends Component({
@@ -178,7 +179,7 @@ export default class Root extends Component({
 
 总结下出现了哪些新东西：
 
-1. 引入`@damo/core`模块
+1. 引入`damo-core`模块
 
   * `BaseModel`数据模型基类，创建model需要继承BaseModel
 
@@ -190,8 +191,8 @@ export default class Root extends Component({
 
     * `@initialState`，描述初始化状态数据
     * `@dispatch`，描述状态数据变更函数，使其函数调用时会自动更新数据到指定状态数据。
-    * `@inputs`，描述数据绑定到视图的数据结构
-    * `@views`，描述视图需要的所有元数据，使视图按预定的程序工作。
+    * `@Input`，描述数据绑定到视图的数据结构
+    * `@View`，描述视图需要的所有元数据，使视图按预定的程序工作。
 2. 概念：组件、数据模型、选择器和数据绑定。
 
 ### 3.0 回顾

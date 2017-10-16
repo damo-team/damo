@@ -78,7 +78,7 @@ Damo框架包括前端应用开发所用到的一系列库，有些是核心库�
 
 ### 图解概念
 
-
+![](/assets/todolist-process.png)
 
 ### 开发原则
 

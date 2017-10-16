@@ -90,9 +90,9 @@ h1 {
 
 ```
 {
-    status: 'SUCCESS',
-    data: {
-        name: "Mr Hero"
+    "status": "SUCCESS",
+    "data": {
+        "name": "Mr Hero"
     }
 }
 ```

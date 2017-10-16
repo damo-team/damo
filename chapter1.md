@@ -55,7 +55,7 @@ import './index.less';
 export default class Root extends Component{
     static routePath = '/';
     static defaultProps = {
-        title: 'My First React App!!';
+        title: 'My First React App!!'
     }
     render(){
         return (<div>

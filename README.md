@@ -74,7 +74,9 @@ Damo框架包括前端应用开发所用到的一系列库，有些是核心库�
 
 ### 图解概念
 
-![](/assets/todolist-process.png)从左到右来看，从页面的多个业务模块对应到代码中的React组件，React组件通过props接收传入的数据，Selector好比是控制器，它来分配指定数据绑定到页面中，从而组件按传入的数据重新渲染。如何获取数据（比如接口获取）需要借助model数据模型来进行，model获取到的数据都会缓存到Store状态容器里。当Selector需要的数据发生变更时，由Store通知Selector重新拿数据。
+![](/assets/todolist-process.png)从左到右来看，从页面的多个业务模块对应到代码中的React组件，React组件通过props接收传入的数据，Selector好比是控制器，它来分配指定数据绑定到页面中，从而组件按传入的数据重新渲染。
+
+如何获取数据（比如接口获取）需要借助model数据模型来进行，model获取到的数据都会缓存到Store状态容器里。当Selector需要的数据发生变更时，由Store通知Selector重新拿数据。
 
 ### 开发原则
 

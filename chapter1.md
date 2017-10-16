@@ -84,7 +84,7 @@ h1 {
 
 #### →定义第一个状态数据
 
-在`app/models`目录下，创建一个user的目录，并在目录下创建`user.js`和`user.json`文件
+在`app/models`目录下，创建`user.js`和`user.json`文件
 
 编辑`user.json`，写入用户的名称
 
@@ -110,7 +110,7 @@ h1 {
 
     @dispatch getUser(){
        return this.getQuery({
-           uri: 'http://localhost:8009/app/models/user/user.json',
+           uri: 'http://localhost:8009/app/models/user.json',
            method: 'get',
            processData: (res) => {
                return res.data;

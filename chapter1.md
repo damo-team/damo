@@ -33,7 +33,7 @@ npm install -g damo-cli
 
 #### →启动开发服务器
 
-进入项目根目录，并启动服务器，（启动之前先安装下node\_modules，调用`npm install命令`安装响应启动依赖到的所有node模块 ，可能需要你等待一段时间\)。
+进入项目根目录，并启动服务器，（启动之前先安装下node\_modules，调用`npm install`命令安装响应启动依赖到的所有node模块 ，可能需要你等待一段时间\)。
 
 ```
 damo serve --open

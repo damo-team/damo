@@ -111,9 +111,10 @@ h1 {
     @dispatch getUser(){
        return this.getQuery({
            response: Api.get('http://localhost:8009/app/models/user.json'),
+           proccessData: res => res.data,
            change: {
-               name: 'profile',
-               callback: res => res.data
+              name: 'profile',
+              callback: data => data
            }
        });
     }
@@ -222,9 +223,10 @@ import {BaseModel, Api, initialState, dispatch} from 'damo-core';
     @dispatch getUser(){
        return this.getQuery({
            response: Api.get('http://localhost:8009/app/models/user.json'),
+           proccessData: res => res.data,
            change: {
-               name: 'profile',
-               callback: res => res.data
+              name: 'profile',
+              callback: data => data
            }
        });
     }

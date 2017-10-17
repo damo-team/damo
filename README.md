@@ -80,7 +80,7 @@ Damo框架包括前端应用开发所用到的一系列库，有些是核心库�
 
 3. 状态数据是单向流动的，Model -&gt; Store -&gt; Selector -&gt; Component。
 
-4. Selector是Component应用数据的一个委托，包括数据获取以及数据产生的操作（由调用Model对应方法来产生数据）。
+4. Selector是Component应用数据的一个控制类，包括数据获取以及数据产生的操作（由调用Model对应方法来产生数据）。
 
 ### 先前技术
 

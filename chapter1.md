@@ -110,11 +110,7 @@ h1 {
 
     @dispatch getUser(){
        return this.getQuery({
-           uri: 'http://localhost:8009/app/models/user.json',
-           method: 'get',
-           processData: (res) => {
-               return res.data;
-           },
+           response: Api.get('http://localhost:8009/app/models/user.json').then(res => res.data),
            change: {
                type: BaseModel.ASSIGN_TYPES.RECONFIGURE,
                name: 'profile'
@@ -202,6 +198,84 @@ export default class Root extends Component{
      * `@View`，描述视图需要的所有元数据，使视图按预定的程序工作。
 
 2. 概念：组件、数据模型、选择器和数据绑定。
+
+
+
+全部代码在一起：
+
+```
+// app/models/user.json - 模拟接口数据
+/**
+{
+    "status": "SUCCESS",
+    "data": {
+        "name": "Mr Hero"
+    }
+}
+*/
+
+// app/models/user.js  - User数据模型，负责把数据写入到状态容器
+import {BaseModel, Api, initialState, dispatch} from 'damo-core'; 
+
+ export default class User extends BaseModel{
+
+    @initialState profile = {};
+
+    @dispatch getUser(){
+       return this.getQuery({
+           response: Api.get('http://localhost:8009/app/models/user.json').then(res => res.data),
+           change: {
+               type: BaseModel.ASSIGN_TYPES.RECONFIGURE,
+               name: 'profile'
+           }
+       });
+    }
+}
+
+// app/scenes/selector.js - 负责从状态容器中取数据，注入到组件
+import {BaseSelector, Input} from 'damo-core'; 
+export default class Selector extends BaseSelector{
+    @Input() 
+    title(state){
+        return state.user.profile.name;
+    }
+    initialize(){
+        this.getModel('user').getUser();
+    }
+}
+
+// app/scenes/index.less - 组件样式
+/**
+h1 { 
+    color: #369; 
+    font-family: Arial, Helvetica, sans-serif; 
+    font-size: 250%; 
+}
+*/
+
+// app/scenes/index.jsx - 组件的代码定义，数据绑定的过程通过装饰器来实现：@View({selector: Selector})
+
+import React, {Component, PropTypes} from "react"; 
+import ReactDOM from 'react-dom';
+import {View} from 'damo-core';  
+import Selector from './selector';
+import './index.less';
+@View({
+    selector: Selector
+})
+export default class Root extends Component{
+    static routePath = '/';
+    static defaultProps = {
+        title: 'My First React App!!'
+    }
+    render(){
+        return (<div>
+            <h1>Welcome to {this.props.title}</h1>
+            <img src="/brand.png" />
+        </div>);
+    }
+};
+```
 
 ### 3.0 回顾
 

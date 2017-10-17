@@ -30,7 +30,7 @@
   * 编辑器VSCode
   * 风格指南
   * 文档构建器Docco
-  * 状态管理去编码化
+  * [状态管理去编码化](其他技术/zhuang-tai-guan-li-qu-bian-ma-hua.md)
   * 状态及性能优化
   * Damo CLI
 * API参考

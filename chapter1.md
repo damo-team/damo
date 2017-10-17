@@ -110,10 +110,11 @@ h1 {
 
     @dispatch getUser(){
        return this.getQuery({
-           response: Api.get('http://localhost:8009/app/models/user.json').then(res => res.data),
+           response: Api.get('http://localhost:8009/app/models/user.json'),
            change: {
                type: BaseModel.ASSIGN_TYPES.RECONFIGURE,
-               name: 'profile'
+               name: 'profile',
+               callback: res => res.data
            }
        });
     }

@@ -127,7 +127,7 @@ User模型类做了2个事情，通过`@initialState`描述了状态数据的初
 
 这一步以及往下看迷茫的话，可以结合概念关系图来理解下，学习基础概念参考[自述]()章节：
 
-![](/assets/todolist-process.png)
+![](/assets/simple.png)
 
 #### →获取状态数据
 

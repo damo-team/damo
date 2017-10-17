@@ -112,7 +112,6 @@ h1 {
        return this.getQuery({
            response: Api.get('http://localhost:8009/app/models/user.json'),
            change: {
-               type: BaseModel.ASSIGN_TYPES.RECONFIGURE,
                name: 'profile',
                callback: res => res.data
            }

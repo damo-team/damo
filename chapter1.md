@@ -10,10 +10,10 @@
 
 > 请先在终端\/控制台窗口中运行命令 `node -v` 和 `npm -v`， **来验证一下你正在运行 node**`6.9.x`** 和 npm **`3.x.x`** 以上的版本。** 更老的版本可能会出现错误，更新的版本则没问题。
 
-然后全局安装Damo CLI
+然后全局安装或者更新Damo CLI
 
 ```
-npm install -g damo-cli
+npm install -g damo-cli@latest
 ```
 
 推荐安装[vscode编辑器](https://code.visualstudio.com/)，并安装插件：`auto import`, `join-lines`, `react-beautify`, `editor config for vscode`, `damo-antd`。
@@ -198,8 +198,6 @@ export default class Root extends Component{
      * `@View`，描述视图需要的所有元数据，使视图按预定的程序工作。
 
 2. 概念：组件、数据模型、选择器和数据绑定。
-
-
 
 全部代码在一起：
 

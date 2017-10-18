@@ -63,7 +63,9 @@ class Custom extends Component{
 2. state状态，React提供的一种用渲染需要的可改变的数值，这样和props配合一起来支持组件模板的渲染。
 3. 当props（父级传入新的值）或者state发生变更时，组件模板会重新的渲染。挂载到父级DOM的HTML结构随之会更新。
 
-完整的组件渲染步骤![](/assets/component-3.png)
+完整的组件渲染步骤![](/assets/component-3.png)组件从初始化到渲染到组件销毁的过程，我们称之为组件生命周期，过程中每个步骤都会触发钩子函数，钩子函数代表每个步骤处理的结果。
+
+把钩子函数标注出来，组件的渲染图步骤![](/assets/component-4.png)
 
 ### 条件与表达式
 

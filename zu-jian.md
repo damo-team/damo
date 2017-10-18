@@ -65,7 +65,11 @@ class Custom extends Component{
 
 完整的组件渲染步骤![](/assets/component-3.png)一般来说组件state用来维护子组件通信的状态数据以及组件自身交互逻辑更新的状态。
 
-1. state
+1. state创建有2种方式
+   1. 当组件是以class类来创建，state可以是class的属性值，也可以在初始化函数通过this.state赋值来创建。
+   2. 当组件是以函数来创建，state需要通过函数的getIntialState函数的返回值来创建。
+2. 更新state必须通过this.setState方法来更新，更新时新旧state会做合并，产生新的state。
+3. setState并不会立即生效，它是异步的，只有触发了钩子函数处理完重新渲染组件时，你才能拿到最新改变的值。
 
 组件从初始化到渲染到组件销毁的过程，我们称之为组件生命周期，过程中每个步骤都会触发钩子函数，钩子函数代表每个步骤处理的结果。
 

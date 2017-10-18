@@ -53,9 +53,17 @@ class Custom extends Component{
 
 ### 组件状态与生命周期
 
-`<Custom/>`组件调用返回组件实例，这其中经历了哪些过程，一起看一下：
+`<Custom/>`组件调用返回组件实例，这其中经历了哪些过程，一起来看：
 
+![](/assets/component-1.png)
 
+则是比较直观的步骤，有2个点概念要掌握：
+
+1. props属性对组件来说只读的，在组件内部改动不会影响到外部，React不建议直接改动props。
+2. state状态，React提供的一种用渲染需要的可改变的数值，这样和props配合一起来支持组件模板的渲染。
+3. 当props（父级传入新的值）或者state发生变更时，组件模板会重新的渲染。挂载到父级DOM的HTML结构随之会更新。
+
+完整的组件渲染步骤![](/assets/component-3.png)
 
 ### 条件与表达式
 

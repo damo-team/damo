@@ -53,6 +53,10 @@ class Custom extends Component{
 
 ### 组件状态与生命周期
 
+&lt;Custom/&gt;组件调用返回组件实例，这其中经历了哪些过程，一起看一下：
+
+
+
 ### 条件与表达式
 
 ### 组件遍历与标志位

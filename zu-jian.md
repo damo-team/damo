@@ -33,6 +33,9 @@ class Custom extends Component{
     static propTypes = {
         label: Props.string.isRequired
     }
+    static defaultProps = {
+        label: 'nobody:'
+    }
     render(){
         return (<div><span>{this.props.label}</span>{this.props.children}</div>);
     }
@@ -43,7 +46,10 @@ class Custom extends Component{
 
 关于组件属性props的调用，前篇[简介](/简介.md)已有介绍，这里再强调下：
 
-
+1. `this.props`可访问到所有传入的组件属性和值。
+2. 静态属性`propsTypes`是声明对传入的属性，需要做类型检查，符合类型的属性值将抛错。
+3. 静态属性`defaultProps`是设置当不传入对应属性时，可以使用默认值来注入到`this.props`。
+4. `this.props.children`是特殊属性值，这是组件内容的引用，上面`this.props.children`指向的是"Hello World"
 
 ### 组件状态与生命周期
 

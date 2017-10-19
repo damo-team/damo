@@ -78,7 +78,7 @@ ReactDOM.render(<Custom/>, document.body); //=== Damo.render(Custom, document.bo
 
 1. 组件内部需要声明`contextTypes`，声明需要哪个服务实例。
 2. 组件`constructor`初始化时，通过`this.context.user`获取user实例。
-3. `Damo.view(Custom, {user: User})`注入服务。
+3. `Damo.view(Custom, {user: User})`分配服务。
 
 咋一看，比之前的代码还多了，但是带来了前所未有的方便。
 
@@ -87,7 +87,27 @@ ReactDOM.render(<Custom/>, document.body); //=== Damo.render(Custom, document.bo
 3. 组件注入了user服务，子组件只要contextTypes声明，也能获取到服务实例，服务可以无限往下传递。
 4. 如果User初始化依赖了其他服务，也依然会初始化并缓存到全局，即多个服务依赖了同一个服务，那么依赖的这个服务只会初始化一遍，实现共享。
 
+```
+function A(){
+}
+
+class B {
+    static contextTypes = {
+        a: PropTypes.object.isRequired
+    }
+}
+Damo.view(Custom, {
+    user: User,
+    a: A,
+    b: B
+});
+```
+
+这里给Custom分配了3个服务，其中A只会初始化一次，即B中依赖的A服务，拿到是A初始化好的实例。服务中依赖其他服务，也通过contextTypes来声明.
+
 ### 注册服务
+
+
 
 ### 注入服务
 

@@ -75,9 +75,21 @@ class Custom extends Component{
 
 把钩子函数标注出来，组件的渲染图步骤![](/assets/component-4.png)React组件的钩子函数
 
-1. componentWillReceiveProps\(nextProps\) 即将接受新改变的props值
+1. `componentWillReceiveProps(nextProps)` 即将接受新改变的props值，props的值需要转变为state的过程可以此进行。
+2. `shouldComponentUpdate(nextProps, nextState)` 新props和新state变更完成后，是否要更新组件渲染，`return false`表示不更新
+3. `componentWillUpdate(nextProps, nextState)` 组件即将调用`render`方法更新组件。
+4. `componentDidUpdate(prevProps, prevState)` 组件`render`调用完成后触发。
+5. 以上钩子函数是会重复触发，有5个钩子函数只会触发一次
+   1. `constructor(props, context)` 组件初始化，`state`创建一般在这里进行。
+   2. `componentWillMoount()` 组件第一次渲染完成后，需要挂载到父级的真实DOM结构下。
+   3. `componentDidMount()` 组件挂载成功后触发
+   4. `componentWillUnmount` 组件销毁之前需要从父级DOM断开。
+   5. `destroy` 组件销毁后触发。
+   
+> 组件销毁是因为父组件被销毁 或者 父组件的模板中移除了该组件。
 
 ### 条件与表达式
+
 
 ### 组件遍历与标志位
 

@@ -73,7 +73,9 @@ class Custom extends Component{
 
 组件从初始化到渲染到组件销毁的过程，我们称之为组件生命周期，过程中每个步骤都会触发钩子函数，钩子函数代表每个步骤处理的结果。
 
-把钩子函数标注出来，组件的渲染图步骤![](/assets/component-4.png)
+把钩子函数标注出来，组件的渲染图步骤![](/assets/component-4.png)React组件的钩子函数
+
+1. componentWillReceiveProps\(nextProps\) 即将接受新改变的props值
 
 ### 条件与表达式
 

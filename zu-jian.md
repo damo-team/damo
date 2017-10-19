@@ -239,11 +239,9 @@ ReactDOM.render(<Parent/>, document.body)
 2. 子组件必须声明`contextTypes`依赖哪个服务，在运行时，父级的对应服务实例才会注入进来。
 3. `this.context`来访问服务实例。
 
-
-
-## Ant Design of React - 一套完整的React组件，绝对是你的开发利器。
+## Ant Design of React - 一套完整的React组件库，绝对是你的开发利器。
 
 地址猛击: [https://ant.design/docs/react/introduce](https://ant.design/docs/react/introduce)
 
-                        ![](/assets/component-5.png)
+![](/assets/component-5.png)
 

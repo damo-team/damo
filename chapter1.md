@@ -344,16 +344,13 @@ class Root extends Component{
     }
 };
 
-// selector和Root建立数据绑定
-export default const ViewComponent = View({
-    selector: Selector
-})(Root)
 
-// app执行，关键的4个步骤
-Damo.init();                         // 初始化
-Damo.model(User);                    // 添加数据模型
-Damo.route('/demo', ViewComponent);  // 建立路由
-Damo.start(ViewComponent);           // 执行入口，根组件
+// app执行，关键的5个步骤
+Damo.init();                                      // 初始化
+Damo.model(User);                                 // 添加数据模型
+const ViewComponent = Damo.view(Selector, Root);  // 给组件加入数据绑定
+Damo.route('/demo', ViewComponent);               // 建立路由
+Damo.start(ViewComponent);                        // 执行入口，根组件
 ```
 
 ### 3.0 回顾

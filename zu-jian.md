@@ -142,11 +142,102 @@ React内置了丰富的组件，基本覆盖了HTML原生标签，包括表单�
 
 那么接下来我们关注的问题是如何管理父组件的state，来达到控制子组件通信的效果。
 
+```
+class Custom extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            color: 'red'
+        }
+    }
+    render(){
+        return (<div>
+            <input value={this.state.color} onChange={(e) => this.setState({color: e.target.value})} />
+            <p style={{color: this.state.color}}>Hello World</p>
+        </div>);
+    }
+}
+```
 
+组件展示了一个输入框和一个段落 2个组件，输入颜色值，段落的文本就编程对应的颜色，默认是红色。
 
-### 组件实例引用与真实DOM节点
+1. 应用了上面提到的表单元素和style属性。
+2. 2个组件交互的状态数据，存放在父级组件的state，在初始化时创建state，当变更时通过setState方法来变更。
+
+### 组件真实实例与真实DOM节点
+
+React组件调用返回组件实例，通过console.log把组件实例打印出来，实际上只是一个描述组件接收值的一个对象，并不是组件new出来的实例
+
+在一些特殊的逻辑中，我们需要获取到组件new出来的实例，从而绕过父子组件通信的约束，直接操作组件new出来的实例，那么我们需要在组件调用时传入ref属性，值为function类型，ref触发时会调用该函数，并传入组件new的实例。
+
+```
+let h1_inst;
+const h1 = (<h1 ref={inst => h1_inst = inst}>test</h1>);
+```
+
+以上代码写法没问题，但是并不能获取到h1的实例。因为只有自定义组件ref属性才有效，同时自定义组件必须要通过class来定义。
+
+按照提示我们改下代码
+
+```
+let h1_inst;
+class H1 extends Component{
+    render(){
+        return (<h1>test</h1>);
+    }
+}
+const h1 = (<H1 ref={inst => h1_inst = inst}/>);
+```
+
+H1是自定义组件，在调用时传入ref属性。当组件调用成功后（即渲染完模板且挂在到DOM上）h1\_inst就拿到了H1 new的实例。
+
+`console.log(h1_inst.props)`可以打印出H1组件传入的props属性。所以说ref可以获取真实的组件实例。
+
+组件调用成功后，组件在HTML文档表现的真实DOM结构，如果非要获取的话，通过`ReactDOM.findDOMNode(组件真实实例)`可返回真实的DOM结构。
 
 ### 组件注入服务
+
+React组件有一个静态属性context，很少有人用到，React官方也不推荐使用。
+
+Damo框架中却推荐大家使用context，动机是因为：
+
+1. React本身只是组件框架，不涉及到提供组件跨容器甚至跨页面之间的通信，此时按照父子组件通信的思路不能解决问题（因为shu与不同的父组件），React官方推荐使用社区的Redux状态管理类库来配合使用，无疑是把构建应用复杂度交给了用户做决定（好坏只能看开发者的掌握程度而定）。
+2. Damo关注与解决构建大型应用，组件通信，组件和接口通信等复杂数据状态的管理和使用的问题。同时也会提供优秀案例的前端解决方案，这些基本都属于独立解决意见特定事情的class类，最终在应用中作为单例运行，方便所有页面可以共享特性。所以Damo推崇服务概念的使用。
+3. 但是本身Damo依赖于React组件。服务要植入到组件中，需要借助于React的context来实现（哪天React组件去除了context，wo们仍有办法往组件中植入服务）。
+
+最后看一个context的例子，更深入的了解服务查看 [服务](/fu-wu.md) 章节。
+
+```
+class Custom extends Component{
+     static contextTypes = {
+          shareObj: PropTypes.object.isRequired
+     }
+     return (){
+          return (<h1>{this.context.shareObj.title}</h1>);
+     }   
+}
+
+class Parent extends Component{
+     getChildContext(){
+          return {
+               shareObj: {
+                    title: 'hello world!'
+               }
+          }
+     }
+     render (){
+          return (<Custom />);
+     }
+}
+
+ReactDOM.render(<Parent/>, document.body)
+```
+
+解释一下实现过程
+
+1. 子组件使用的服务context，只能由父级组件提供，父级组件通过`getChildContext`方法返回创建好的服务实例。
+2. 子组件必须声明`contextTypes`依赖哪个服务，在运行时，父级的对应服务实例才会注入进来。
+3. `this.context`来访问服务实例。
 
 
 

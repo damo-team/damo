@@ -301,7 +301,7 @@ class User extends BaseModel{
             profile: {}
         }
     }
-    
+
     getUser(){
        return this.getQuery({
            response: Api.get('https://api.github.com/users/baqian'),
@@ -327,7 +327,7 @@ class Selector extends BaseSelector{
     }
 }
 
-// 组件的代码定义，数据绑定的过程通过装饰器来实现：@View({selector: Selector})
+// 组件的代码定义
 class Root extends Component{
     static defaultProps = {
         title: 'My First React App!!'
@@ -349,7 +349,7 @@ export default const ViewComponent = View({
 Damo.init();                         // 初始化
 Damo.model(User);                    // 添加数据模型
 Damo.route('/demo', ViewComponent);  // 建立路由
-Damo.start(ViewComponent);           // 执行入口，根组件 
+Damo.start(ViewComponent);           // 执行入口，根组件
 ```
 
 ### 3.0 回顾

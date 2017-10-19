@@ -277,6 +277,81 @@ export default class Root extends Component{
 };
 ```
 
+也许你还有疑惑，创建好的User是什么时机被应用的? 装饰器封装太绕，去装饰器如何实现？缺少路由？
+
+为了对应用代码有个概览认识，下面代码展示了一个小应用实现, 整个拷贝到app/app.jsx覆盖掉原有代码，想要深入理解每个部分可以学习教程章节。
+
+```
+import React, {Component, PropTypes} from "react"; 
+import ReactDOM from 'react-dom';
+import {
+    View, 
+    BaseModel, 
+    BaseSelector,
+    Api, 
+    initialState, 
+    dispatch
+} from 'damo-core';  
+
+
+// User数据模型，负责把数据写入到状态容器
+class User extends BaseModel{
+    get properties(){
+        return {
+            profile: {}
+        }
+    }
+    
+    getUser(){
+       return this.getQuery({
+           response: Api.get('https://api.github.com/users/baqian'),
+           proccessData: res => res,
+           change: {
+              name: 'profile',
+              callback: data => data
+           }
+       })(this.dispatch);
+    }
+}
+
+// selector负责从状态容器中取数据，注入到组件
+class Selector extends BaseSelector{
+    get inputs(){
+        return (state, ownProps) => {
+            return state.user.profile.login;
+        }
+    }
+
+    initialize(){
+        this.getModel('user').getUser();
+    }
+}
+
+// 组件的代码定义，数据绑定的过程通过装饰器来实现：@View({selector: Selector})
+class Root extends Component{
+    static defaultProps = {
+        title: 'My First React App!!'
+    }
+    render(){
+        return (<div>
+            <h1>Welcome to {this.props.title}</h1>
+            <img src="/brand.png" />
+        </div>);
+    }
+};
+
+// selector和Root建立数据绑定
+export default const ViewComponent = View({
+    selector: Selector
+})(Root)
+
+// app执行，关键的4个步骤
+Damo.init();                         // 初始化
+Damo.model(User);                    // 添加数据模型
+Damo.route('/demo', ViewComponent);  // 建立路由
+Damo.start(ViewComponent);           // 执行入口，根组件 
+```
+
 ### 3.0 回顾
 
 如你所愿，我们完成了这个“Hello, World”应用。

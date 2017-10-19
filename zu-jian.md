@@ -16,6 +16,9 @@
    2. `const Custom = (<h1 title={1}/>);` `h1`的属性`title`传值为`1`
    3. `const Custom = (<h1 content={<span>Hello World!</span>}/>` `h1`的属性`content`传了一个`span`组件。
 
+> `{xxx}`填写的表达式只能为一个，结束不能包含`;`, 表达式的返回结果必须为JS原始类型（`null`, `undefined`, `string`, `number`, `boolean`）或者 React组件实例。
+有一种特殊情况，表达式可以返回数组，在 遍历与标识位 段落有详细说明。
+
 对于HTML标签对应的React组件，其特性属性，比如`title`、`width`等属性可以被组件正常使用，基本和HTML标签展示结果无异。但是仍有部分特殊的属性和HTML的概念不同。
 
 总结起来分为3类：
@@ -59,17 +62,17 @@ class Custom extends Component{
 
 则是比较直观的步骤，有2个点概念要掌握：
 
-1. props属性对组件来说只读的，在组件内部改动不会影响到外部，React不建议直接改动props。
-2. state状态，React提供的一种用渲染需要的可改变的数值，这样和props配合一起来支持组件模板的渲染。
-3. 当props（父级传入新的值）或者state发生变更时，组件模板会重新的渲染。挂载到父级DOM的HTML结构随之会更新。
+1. `props`属性对组件来说只读的，在组件内部改动不会影响到外部，React不建议直接改动`props`。
+2. `state`状态，React提供的一种用渲染需要的可改变的数值，这样和props配合一起来支持组件模板的渲染。
+3. 当`props`（父级传入新的值）或者`state`发生变更时，组件模板会重新的渲染。挂载到父级DOM的HTML结构随之会更新。
 
 完整的组件渲染步骤![](/assets/component-3.png)一般来说组件state用来维护子组件通信的状态数据以及组件自身交互逻辑更新的状态。
 
 1. state创建有2种方式
-   1. 当组件是以class类来创建，state可以是class的属性值，也可以在初始化函数通过this.state赋值来创建。
-   2. 当组件是以函数来创建，state需要通过函数的getIntialState函数的返回值来创建。
-2. 更新state必须通过this.setState方法来更新，更新时新旧state会做合并，产生新的state。
-3. setState并不会立即生效，它是异步的，只有触发了钩子函数处理完重新渲染组件时，你才能拿到最新改变的值。
+   1. 当组件是以`class`类来创建，`state`可以是`class`的属性值，也可以在初始化函数通过`this.state`赋值来创建。
+   2. 当组件是以函数来创建，`state`需要通过函数的`getIntialState`函数的返回值来创建。
+2. 更新`state`必须通过`this.setState`方法来更新，更新时新旧`state`会做合并，产生新的`state`。
+3. `setState`并不会立即生效，它是异步的，只有触发了钩子函数处理完重新渲染组件时，你才能拿到最新改变的值。
 
 组件从初始化到渲染到组件销毁的过程，我们称之为组件生命周期，过程中每个步骤都会触发钩子函数，钩子函数代表每个步骤处理的结果。
 

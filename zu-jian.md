@@ -20,10 +20,10 @@
 
 总结起来分为3类：
 
-1. 同名的组件在调用时，其真实结构对应就是HTML标签，上面提到的概念相同的属性会体现在真实结构的HTML标签上，除此之外，data-\*形式的属性也可以被专递下来，其他的属性将会丢失。
+1. 同名的组件在调用时，其真实结构对应就是HTML标签，上面提到的概念相同的属性会体现在真实结构的HTML标签上，除此之外，`data-*`形式的属性也可以被专递下来，其他的属性将会丢失。
 2. 不同的属性分3种：
    1. 事件属性，`onclick`、`onmouseenter`等，不再被接收，取而代之的是`onClick`、`onMouseenter`等驼峰形式的属性书写，从而来实现事件触发（使用上有一点不同，就是原生事件`return false`就终止默认的HTML标签行为，比如a链接点击会跳转到href的地址，`return false`后不会跳转。统一是通过`preventDefault`方法来控制）。
-   2. 所有标签的`class`和`style`属性失效，React组件使用`className`和`style`来替代。而`style`属性只能是`CSS`的json形式，比如`style={{backgroundColor: 'red'}}`，其中`backgroundColor`而不是`background-color`,规则名以驼峰形式。
+   2. 所有标签.
    3. 表单元素的部分属性，包括`value`、`checked`、`selected`属性，属性不会丢失，但是使用概念却完全不同，以下表单元素段落有说明（特殊的Textarea标签的innerText也已value来代替）。
 
 所有自定义的组件，其属性传递的值，只能在组件内部可以使用，其含义也只能在组件内部才能够了解。

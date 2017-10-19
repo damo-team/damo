@@ -279,7 +279,9 @@ export default class Root extends Component{
 
 也许你还有疑惑，创建好的User是什么时机被应用的? 装饰器封装太绕，去装饰器如何实现？缺少路由？
 
-为了对应用代码有个概览认识，下面代码展示了一个小应用实现, 整个拷贝到app/app.jsx覆盖掉原有代码，想要深入理解每个部分可以学习教程章节。
+> 为了对应用代码有个概览认识，下面代码展示了一个小应用实现, 整个拷贝到app/app.jsx覆盖掉原有代码，想要深入理解每个部分可以学习教程章节。
+
+### 迷你App
 
 ```
 import React, {Component, PropTypes} from "react"; 

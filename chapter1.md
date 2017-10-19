@@ -298,10 +298,8 @@ import {
 
 // User数据模型，负责把数据写入到状态容器
 class User extends BaseModel{
-    get properties(){
-        return {
-            profile: {}
-        }
+    static initialState = {
+        profile: {}
     }
 
     getUser(){
@@ -318,16 +316,12 @@ class User extends BaseModel{
 
 // selector负责从状态容器中取数据，注入到组件
 class Selector extends BaseSelector{
-    get inputs(){
-        return (state, ownProps) => {
-            return {
-                title: state.user.profile.login
-            }
-        }
+    static dataBindings = {
+        title: Damo.select(User, 'profile.login')
     }
 
     initialize(){
-        this.getModel('user').getUser();
+        this.getModel(User).getUser();
     }
 }
 

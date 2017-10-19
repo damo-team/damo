@@ -318,7 +318,9 @@ class User extends BaseModel{
 class Selector extends BaseSelector{
     get inputs(){
         return (state, ownProps) => {
-            return state.user.profile.login;
+            return {
+                title: state.user.profile.login
+            }
         }
     }
 

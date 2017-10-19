@@ -123,7 +123,26 @@ const Custom = (<ul>{
 
 ### 表单元素
 
+React内置了丰富的组件，基本覆盖了HTML原生标签，包括表单元素组件，为了这些组件能按照React的机制来运行，表单元素组件的属性赋有额外的含义。
+
+1. `placeholder`属性正常使用
+2. `value`属性, 表单元素的值通过`value`属性赋值。`textarea`元素的输入值也通过value属性赋值。
+3. `disabled`、`selected`、`checked`属性需要赋值true和false来激活。
+4. `onChange`事件，取代了`onchange`原生事件，通过`event.target.value`可获取到变更的值。
+5. 其他
+   1. 没有`readonly`属性，根据`value`属性值做判断，初始化时`value`值不为`undefined`或`null`时表示组件为只读的，组件从只读变为可读写只需要把`value`值改为`undefined`或`null`
+   2. 新增`defaultValue`属性，即想组件初始化时有value值，同时组件也可读写，则通过`defaultValue`赋值来实现，此时`value`值不传值。
+
 ### 组件通信
+
+组件通信是指同级组件之间通信和父子组件的通信，在React中组件通信都属于父子组件的通信，为什么这么讲:
+
+1. React组件的props是只读的，组件内无法改变外部的数据。但是可以通知父组件来改，然后再拿到新的props.
+2. React组件的state可以维护组件内可变的数据，子组件可变的props通常是存在父组件的state中。
+
+那么接下来我们关注的问题是如何管理父组件的state，来达到控制子组件通信的效果。
+
+
 
 ### 组件实例引用与真实DOM节点
 

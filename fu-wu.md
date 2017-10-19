@@ -59,7 +59,7 @@ class Custom exends React.Component{
     }
     constructor(props, context){
         super(props, context);
-        
+
         this.state = {};
         this.context.user.getUser().then(res => {
             this.setState({user: res});
@@ -83,7 +83,7 @@ ReactDOM.render(<Custom/>, document.body); //=== Damo.render(Custom, document.bo
 咋一看，比之前的代码还多了，但是带来了前所未有的方便。
 
 1. 组件调用时，如果找不到user服务实例，会抛错，也就是可以给组件依赖的服务做异常检查，方便定位问题。
-2. 服务只有都能够组件调用时才会初始化，前端称之为懒执行。
+2. 服务只有都能够组件调用时才会初始化，前端称之为懒执行，减少时间开销。
 3. 组件注入了user服务，子组件只要contextTypes声明，也能获取到服务实例，服务可以无限往下传递。
 4. 如果User初始化依赖了其他服务，也依然会初始化并缓存到全局，即多个服务依赖了同一个服务，那么依赖的这个服务只会初始化一遍，实现共享。
 

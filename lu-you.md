@@ -51,13 +51,11 @@ damo中通过`damo.bootstrap(ReactElement, DOM)` 来启动应用，已经注册�
 路由注册的方式有2种：
 
 1. `damo.route(path, Component)` 注册一个最上级路由，通过返回一个注册子路由的构建器。当Component存在静态属性routePath时，可以省去path参数,`damo.route(Component)`
-2. 比如`router.route('/subRoute', ChildRouteComponent);`通过构建器，注册了父级路由下的子路由。另外一种父子路由注册的方式为：`damo.route(path, Component, {childRoutes: [{path, component}]}`
+2. 比如`router.route('/subRoute', ChildRouteComponent);`通过构建器，注册了父级路由下的子路由。另外一种父子路由注册的方式为：`damo.route(path, Component, {childRoutes: [{path, component}]});`
 
 ### 路由拦截
 
 ### 多应用路由
-
-
 
 ### 路由自动化
 

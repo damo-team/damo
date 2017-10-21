@@ -125,8 +125,6 @@ damo.autoLoadRoutes(require.context('./scenes', true, /\w+\/index\.jsx$/));
 
 以上代码表示遍历`./secnes/**/index.jsx` 所有文件，并注册好路由，目录的层级结构决定了父子路由的关系。
 
-
-
 ### 
 
 

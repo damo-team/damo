@@ -120,11 +120,12 @@ damo.view(Custom, {
 注册服务是预先注册好服务类，服务可以注册到全局，也可以在局部组件内。在框架启动时或者组件调用时，服务才会被初始化（懒执行），从而提高页面渲染速度。
 
 ```
-class A{
+// 
+function A(){
     return true;
 }
-function B(){
-    return {};
+function B(a){
+    return {bool: a};
 }
 B.contextTypes = {
     a: React.Proptypes.boolean.isRequired
@@ -148,6 +149,7 @@ class Com extends React.Component{
         c: React.Proptypes.object.isRequired
     }
 }
+const ComByServices = damo.view(Com, {c: C});
 ```
 
 ### 注入服务

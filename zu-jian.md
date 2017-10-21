@@ -16,7 +16,7 @@
    2. `const Custom = (<h1 title={1}/>);` `h1`的属性`title`传值为`1`
    3. `const Custom = (<h1 content={<span>Hello World!</span>}/>` `h1`的属性`content`传了一个`span`组件。
 
-> `{xxx}`填写的表达式只能为一个，结束不能包含`;`, 表达式的返回结果必须为JS原始类型（`null`, `undefined`, `string`, `number`, `boolean`）或者 React组件实例。  
+> `{xxx}`填写的表达式只能为一个，结束不能包含`;`, 表达式的返回结果必须为JS原始类型（`null`, `undefined`, `string`, `number`, `boolean`）或者 React元素。  
 > 有一种特殊情况，表达式可以返回数组，在 遍历与标识位 段落有详细说明。
 
 对于HTML标签对应的React组件，其特性属性，比如`title`、`width`等属性可以被组件正常使用，基本和HTML标签展示结果无异。但是仍有部分特殊的属性和HTML的概念不同。
@@ -56,7 +56,7 @@ class Custom extends Component{
 
 ### 组件状态与生命周期
 
-`<Custom/>`组件调用返回组件实例，这其中经历了哪些过程，一起来看：
+`<Custom/>`组件调用返回React元素，这其中经历了哪些过程，一起来看：
 
 ![](/assets/component-1.png)
 
@@ -93,9 +93,9 @@ class Custom extends Component{
 
 ### 遍历与标志位key
 
-这里会着重介绍表达式的用法，JSX模板已`{}`来嵌入表达式语句，其表达式返回结果只能为JS原始类型或者React组件实例
+这里会着重介绍表达式的用法，JSX模板已`{}`来嵌入表达式语句，其表达式返回结果只能为JS原始类型或者React元素
 
-试想下，表达式可以返回React组件实例，表达式如何执行并不做限定，以下代码能正常运行。
+试想下，表达式可以返回React元素，表达式如何执行并不做限定，以下代码能正常运行。
 
 ```
 const ComA = (<h1>Hello World</h1>);
@@ -106,7 +106,7 @@ const Custom = (<div>{count > 1? <ComA/> : <ComB/>}</div>);
 
 > 三元判断是表达式，if...else...条件语句不是表达式， for...也不是表达式。
 
-一种特殊的情况是，表达式可以返回数组，如果数组项的值为JS原始类型仍可以正常执行，但是数据项为React组件实例时则会出现一些状况（每次模板更新时，组件实例都会重新的生成），这是因为JSX模板没法跟踪组件实例，除非组件带有唯一的标志位key，这样模板更新时React能够识别组件实例是要重新创建还是只做更新。
+一种特殊的情况是，表达式可以返回数组，如果数组项的值为JS原始类型仍可以正常执行，但是数据项为React元素时则会出现一些状况（每次模板更新时，React元素都会重新的生成），这是因为JSX模板没法跟踪React元素，除非组件带有唯一的标志位key，这样模板更新时React能够识别React元素是要重新创建还是只做更新。
 
 ```
 const Li = function(props){ return (<li>{this.props.text}</li>); }
@@ -118,7 +118,7 @@ const Custom = (<ul>{
                 }</ul>);
 ```
 
-1. 数组中组件实例必须带有key属性，其key值必须为数组内唯一，即2个`Item`的key不能相同。
+1. 数组中React元素必须带有key属性，其key值必须为数组内唯一，即2个`Item`的key不能相同。
 2. key是在组件调用时传入，而不是组件内部，即如果只在`Li`的JSX模板中写key是没用的。
 
 ### 表单元素
@@ -166,7 +166,7 @@ class Custom extends Component{
 
 ### 组件真实实例与真实DOM节点
 
-React组件调用返回组件实例，通过console.log把组件实例打印出来，实际上只是一个描述组件接收值的一个对象，并不是组件new出来的实例
+React组件调用返回React元素，通过console.log把React元素打印出来，实际上只是一个描述组件接收值的一个对象，并不是组件new出来的实例
 
 在一些特殊的逻辑中，我们需要获取到组件new出来的实例，从而绕过父子组件通信的约束，直接操作组件new出来的实例，那么我们需要在组件调用时传入ref属性，值为function类型，ref触发时会调用该函数，并传入组件new的实例。
 
@@ -191,7 +191,7 @@ const h1 = (<H1 ref={inst => h1_inst = inst}/>);
 
 H1是自定义组件，在调用时传入ref属性。当组件调用成功后（即渲染完模板且挂在到DOM上）h1\_inst就拿到了H1 new的实例。
 
-`console.log(h1_inst.props)`可以打印出H1组件传入的props属性。所以说ref可以获取真实的组件实例。
+`console.log(h1_inst.props)`可以打印出H1组件传入的props属性。所以说ref可以获取真实的React元素。
 
 组件调用成功后，组件在HTML文档表现的真实DOM结构，如果非要获取的话，通过`ReactDOM.findDOMNode(组件真实实例)`可返回真实的DOM结构。
 

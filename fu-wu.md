@@ -120,45 +120,64 @@ damo.view(Custom, {
 注册服务是预先注册好服务类，服务可以注册到全局，也可以在局部组件内。在框架启动时或者组件调用时，服务才会被初始化（懒执行），从而提高页面渲染速度。
 
 ```
-// 
+// 创建方式1： 函数式服务
 function A(){
     return true;
 }
-function B(a){
+A.contextTypes = {}
+// 创建方式2： 数组式服务
+const B = ['a', function (a){
     return {bool: a};
-}
-B.contextTypes = {
-    a: React.Proptypes.boolean.isRequired
-}
+}]
+// 创建方式3： class服务
 class C{
     static contextTypes = {
         a: React.Proptypes.boolean.isRequired,
         b: React.Proptypes.object.isRequired,
     }
+    constructor(){
+    }
 }
 
+// 注册服务1：全局服务，displayName指定服务实例名称
 A.displayName = 'a';
 damo.service(A)
+// 注册服务2：全局服务，map的key指定服务名称
 damo.service({b: B});
-damo.service(['a', function(a){
-    console.log(a);
-}]);
+// 注册服务3：全局服务，一次注册多个
+C.displayName = 'c';
+damo.service([C]);
 
+// 注册服务4：局部服务，挂在组件下
 class Com extends React.Component{
     static contextTypes = {
+        b: React.Proptypes.object.isRequired,
         c: React.Proptypes.object.isRequired
     }
 }
+// 调用组件要注入服务，需要调用ComByServices组件，而不是Com组件。
 const ComByServices = damo.view(Com, {c: C});
 ```
 
-### 注入服务
+服务的操作比较灵活，代码中展示了服务的注册和服务的注入。
 
-### 服务依赖
+1. 3种服务创建方式
+   1. 数组形式，需要显示声明依赖的服务实例名称，在数组最后一项是服务的函数定义，在服务调用时参数中会传入依赖的服务实例引用。
+   2. 其他方式，需要通过静态属性contextTypes声明依赖的服务实例名称。
+2. 4种服务注册
+   1. map结构注册服务时，key为服务实例的名称。
+   2. 其他方式注册服务，需要通过服务的静态属性displayName来声明服务的实例名称。
+   3. 注册服务可以以数组形式注册多个。
+
+### 服务依赖和注入
+
+
 
 ### Ioc控制反转
 
-### 内置通用服务
+### 内置服务
+
+敬请期待
 
 
 

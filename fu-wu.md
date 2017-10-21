@@ -87,7 +87,8 @@ damo.bootstrap(viewComponent, document.body);
 
 1. 组件内部需要声明`contextTypes`，声明需要哪个服务实例。
 2. 组件`constructor`初始化时，通过`this.context.user`获取user实例。
-3. `Damo.view(Custom, {user: User})`分配服务。
+3. `Damo.view(Custom, {user: User})`分配服务，返回封装好的组件（HOC）。
+4. `damo.bootstrap` 渲染组件并挂载到body下。
 
 咋一看，比之前的代码还多了，但是带来了前所未有的方便。
 
@@ -105,7 +106,7 @@ class B {
         a: PropTypes.object.isRequired
     }
 }
-Damo.view(Custom, {
+damo.view(Custom, {
     user: User,
     a: A,
     b: B

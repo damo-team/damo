@@ -286,14 +286,11 @@ export default class Root extends Component{
 ```
 import React, {Component, PropTypes} from "react";
 import ReactDOM from 'react-dom';
-import {
-  damo,
-  View,
+import damo, {
   BaseModel,
   BaseSelector,
-  Api,
-  dispatch
-} from '../../src/index'; // #! damo-core
+  Api
+} from 'damo-core'; 
 
 // User数据模型，负责把数据写入到状态容器
 class User extends BaseModel {

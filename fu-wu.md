@@ -185,5 +185,9 @@ const ComByServices = damo.view(Com, {c: C});
 
 ### 内置服务
 
-敬请期待
+damo会提供有利于构建复杂应用的通用服务。
+
+事实上BaseSelector就是一种特殊的服务，selector类都需要继承于BaseSelector，用于链接store容器，从状态容器获取数据绑定到组件中。在[数据绑定](/状态与数据绑定.md)篇章详细介绍。
+
+更多内置服务敬请期待
 

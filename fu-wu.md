@@ -45,33 +45,42 @@ Damo把通用类统称为服务，并提供一种服务注入机制，自上下�
 ```
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Damo from 'damo-core';
+import damo from 'damo-core';
 
-class User{
-    getUser(){
-        return fetch('https://api.github.com/users/baqian').then(response => response.json());
-    }
+class User {
+  getUser() {
+    return fetch('https://api.github.com/users/baqian').then(response => response.json());
+  }
 }
 
-class Custom exends React.Component{
-    static contextTypes = {
-        user: React.PropTypes.object.isRequired
-    }
-    constructor(props, context){
-        super(props, context);
+class Custom extends React.Component {
+  static contextTypes = {
+    user: React.PropTypes.object.isRequired
+  }
+  constructor(props, context) {
+    super(props, context);
 
-        this.state = {};
-        this.context.user.getUser().then(res => {
-            this.setState({user: res});
-        });
-    }
-    render(){
-        return (<h1>{this.state.user.login}</h1>);
-    }
+    this.state = {
+      user: {}
+    };
+    this
+      .context
+      .user
+      .getUser()
+      .then(res => {
+        this.setState({user: res});
+      });
+  }
+  render() {
+    return (
+      <h1>{this.state.user.login}</h1>
+    );
+  }
 }
+damo.init();
+const viewComponent = damo.view(Custom, {user: User});
 
-Damo.view(Custom, {user: User});
-ReactDOM.render(<Custom/>, document.body); //=== Damo.render(Custom, document.body);
+damo.bootstrap(viewComponent, document.body);
 ```
 
 对比代码，有3点不同：
@@ -106,8 +115,6 @@ Damo.view(Custom, {
 这里给Custom分配了3个服务，其中A只会初始化一次，即B中依赖的A服务，拿到是A初始化好的实例。服务中依赖其他服务，也通过contextTypes来声明.
 
 ### 注册服务
-
-
 
 ### 注入服务
 

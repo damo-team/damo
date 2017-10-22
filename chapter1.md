@@ -10,13 +10,15 @@
 
 > 请先在终端\/控制台窗口中运行命令 `node -v` 和 `npm -v`， **来验证一下你正在运行 node**`6.9.x`** 和 npm **`3.x.x`** 以上的版本。** 更老的版本可能会出现错误，更新的版本则没问题。
 
-然后全局安装或者更新Damo CLI
+然后全局安装或者更新[Damo CLI ](/其他技术/damo-cli.md)
 
 ```
 npm install -g damo-cli@latest
 ```
 
 推荐安装[vscode编辑器](https://code.visualstudio.com/)，并安装插件：`auto import`, `join-lines`, `react-beautify`, `editor config for vscode`, `damo-antd`。
+
+> Damo CLI帮助你更方便创建一个damo应用。
 
 #### →创建新项目
 

@@ -10,12 +10,16 @@ class UserSelector extends damo.BaseSelector{
 
     static eventBindings = {
         getUser: (dispatch, ownProps){
-            this.getModel('user').getUser();
+            this.getUser();
         }
     }
 
     initialize(ownProps){
-        // this.getModel('user').getUser();
+        // this.getUser();
+    }
+    
+    getUser(){
+        this.getModel('user').getUser();
     }
 }
 
@@ -47,6 +51,22 @@ damo.bootstrap(ViewComponent, document.body);
 
 > damo.view\(\[selector\], component, \[providers\]\)函数的标准调用，selector可以为空，providers是需要注入的服务，在服务章节有讲解。
 
+selector同时一种特殊的服务，从前面我们了解到，在组件中通过contextTypes声明注入的服务，通过this.context可以访问到服务实例，所以通过this.context.selector可以访问到selector实例，改造一下Custom组件。
+
+```
+class Custom extends React.Component{
+    static contextTypes = {
+        selector: React.PropTypes.object.isRequired
+    }
+    componentWillMount(){
+        this.context.selector.getUser();
+    }
+    render(){
+        return (<h1>{this.props.profile.login}</h1>);
+    }
+}
+```
+
 ### 回顾damo的数据驱动机制![](/assets/import.png)
 
 数据模型model，向store写入数据，通过damo.model添加数据模型。
@@ -54,6 +74,4 @@ damo.bootstrap(ViewComponent, document.body);
 选择器selector，从store读取数据，通过damo.view绑定选择器到组件。
 
 现在是否对damo有个清晰的认识了，赶紧去试下吧。
-
-
 

@@ -41,7 +41,7 @@ damo serve --open
 
 使用`--open`（或`-o`）参考可以自动打开浏览器并访问 `http://localhost:8009/`（访问地址在根目录下的`config.local.json`文件可以更改）
 
-![](/assets/屏幕快照 2017-10-13 17.00.39.png)
+![](/assets/屏幕快照 2017-10-22 上午10.49.17.png)
 
 #### →编辑第一个React组件
 

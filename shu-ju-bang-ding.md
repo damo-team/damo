@@ -42,10 +42,18 @@ damo.bootstrap(ViewComponent, document.body);
    3. 注入的数据，在组件内部通过`this.props`可以访问到。
    4. 数据模型添加是在全局中，`selector`通过`this.getModel`（由BaseSelector继承而来）可以访问model实例，从而进行操作。
    5. selector存在一个钩子函数，`initialize`是指组件`compoentWillMount`时触发，起到相同的效果。
-2. 组件实际上不用太关心selector，对于组件来说，需要的状态数据都是通过`this.props`获取到，保持了组件的纯净，脱离了damo扔可以使用，提高复用性。
+2. 组件实际上不用太关心`selector`，对于组件来说，需要的状态数据都是通过`this.props`获取到，保持了组件的纯净，脱离了damo扔可以使用，提高复用性。
 3. `damo.view(UserSelector, Custom)`建立`selector`到`component`的数据绑定机制，返回新的组件来使用。
 
 > damo.view\(\[selector\], component, \[providers\]\)函数的标准调用，selector可以为空，providers是需要注入的服务，在服务章节有讲解。
+
+### 回顾damo的数据驱动机制![](/assets/import.png)
+
+数据模型model，向store写入数据，通过damo.model添加数据模型。
+
+选择器selector，从store读取数据，通过damo.view绑定选择器到组件。
+
+现在是否对damo有个清晰的认识了，赶紧去试下吧。
 
 
 

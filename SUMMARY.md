@@ -10,8 +10,8 @@
   * [数据模型](数据调用.md)
   * [数据绑定](shu-ju-bang-ding.md)
 * 核心知识
-  * 架构
-  * 引导启动
+  * [架构](jia-gou.md)
+  * [引导启动](yin-dao-qi-dong.md)
   * 容器与组件
   * HTTP
   * 数据模型与状态管理

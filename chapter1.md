@@ -283,7 +283,7 @@ export default class Root extends Component{
 
 > 为了对应用代码有个概览认识，下面代码展示了一个小应用实现, 整个拷贝到app/app.jsx覆盖掉原有代码，想要深入理解每个部分可以学习教程章节。
 
-### 迷你App
+### 迷你App {#minapp}
 
 ```
 import React, {Component, PropTypes} from "react";

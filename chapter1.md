@@ -350,7 +350,7 @@ damo.init(); // 初始化
 damo.model(User); // 添加数据模型
 const ViewComponent = damo.view(Selector, Root); // 给组件加入数据绑定
 damo.route('/demo', ViewComponent); // 建立路由
-damo.bootstrap(ViewComponent, document.body); // 执行入口，根组件
+damo.bootstrap(document.body); // 执行入口，根组件
 ```
 
 ### 3.0 回顾

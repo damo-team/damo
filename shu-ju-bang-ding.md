@@ -9,15 +9,13 @@ class UserSelector extends damo.BaseSelector{
     }
 
     static eventBindings = {
-        getUser: (dispatch, ownProps){
-            this.getUser();
-        }
+        getUser: damo.invoke('user', 'getUser')
     }
 
     initialize(ownProps){
         // this.getUser();
     }
-    
+
     getUser(){
         this.getModel('user').getUser();
     }

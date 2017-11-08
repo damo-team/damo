@@ -7,10 +7,11 @@
 ```
 import React from 'react';
 import ReactDOM from 'react-dom';
+import damo from 'damo-core'
 
 class User{
     getUser(){
-        return fetch('https://api.github.com/users/baqian').then(response => response.json());
+        return damo.Api.get('https://api.github.com/users/baqian').then(response => response.json());
     }
 }
 const user = new User();
@@ -49,7 +50,7 @@ import damo from 'damo-core';
 
 class User {
   getUser() {
-    return fetch('https://api.github.com/users/baqian').then(response => response.json());
+    return damo.Api.get('https://api.github.com/users/baqian').then(response => response.json());
   }
 }
 
@@ -77,18 +78,19 @@ class Custom extends React.Component {
     );
   }
 }
-damo.init();
-const viewComponent = damo.view(Custom, {user: User});
 
-damo.bootstrap(viewComponent, document.body);
+// 要调用damo下任何方法，都应该先init初始化。
+damo.init();
+// 注册服务
+damo.service('user', User);
+// 启动
+damo.bootstrap(Custom, document.body); // damo.run也适用，这里等同于ReactDOM.render(Custom, document.body);
 ```
 
 对比代码，有3点不同：
 
 1. 组件内部需要声明`contextTypes`，声明需要哪个服务实例。
 2. 组件`constructor`初始化时，通过`this.context.user`获取user实例。
-3. `Damo.view(Custom, {user: User})`分配服务，返回封装好的组件（HOC）。
-4. `damo.bootstrap` 渲染组件并挂载到body下。
 
 咋一看，比之前的代码还多了，但是带来了前所未有的方便。
 

@@ -69,6 +69,20 @@ class Custom extends React.Component{
 }
 ```
 
+damo.view的用法
+
+```
+// 1. 绑定数据，直接注入Model实例名，内部实际上会创建一个简单的Selector，并把Model的状态数据和行为注入到组件中
+damo.view(['user'], Component)
+// 2. 绑定Selector和Component
+damo.view(Slector, Component)
+// 3. 注入局部服务
+damo.view(Component, {user: User});
+// 4. 绑定Selector和注入局部服务
+damo.view(Selector, Component, {user: User});
+damo.view(['user'], Component, {user: User});
+```
+
 ### 回顾damo的数据驱动机制![](/assets/import.png)
 
 数据模型model，向store写入数据，通过damo.model添加数据模型。

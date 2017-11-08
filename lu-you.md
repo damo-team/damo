@@ -43,10 +43,11 @@ const router = damo.route('/', ParentRouteComponent);
 damo.route('/child', ChildRouteComponent);
 router.route('/subRoute', ChildRouteComponent);
 
+// 主要注册过了服务，启动只需要指定从哪个DOM为入口即可。
 damo.bootstrap(document.body);
 ```
 
-damo中通过`damo.bootstrap(ReactElement, DOM)` 来启动应用，已经注册路由后，可以通过`damo.bootstrap(DOM` 直接启动。
+damo中通过`damo.bootstrap(ReactElement, DOM)` 来启动应用，已经注册路由后，可以通过`damo.bootstrap(DOM)` 直接启动。
 
 路由注册的方式有2种：
 
@@ -120,10 +121,10 @@ damo.bootstrap([{
 路由自动化是结合app目录，通过自动遍历目录结构生成App的路由
 
 ```
-damo.autoLoadRoutes(require.context('./scenes', true, /\w+\/index\.jsx$/));
+damo.autoLoadRoutes(require.context('./scenes', true, /index\.jsx$/));
 ```
 
-以上代码表示遍历`./secnes/**/index.jsx` 所有文件，并注册好路由，目录的层级结构决定了父子路由的关系。
+以上代码表示遍历`./**/index.jsx` 所有文件，并注册好路由，目录的层级结构决定了父子路由的关系。
 
 ### 
 

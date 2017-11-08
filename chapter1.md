@@ -106,53 +106,49 @@ h1 {
 打开`user.js`文件，创建描述状态数据的数据模型`User`。
 
 ```
- import {BaseModel, Api, initialState, dispatch} from 'damo-core'; 
+ import damo from 'damo-core'; 
 
- export default class User extends BaseModel{
+ export default class User extends damo.BaseModel{
+    static displayName = 'user'
 
-    @initialState profile = {};
+    static initialState = {
+       profile: {}
+    }
 
-    @dispatch getUser(){
-       return this.getQuery({
-           response: Api.get('http://localhost:8009/app/models/user.json'),
-           proccessData: res => res.data,
-           change: {
-              name: 'profile',
-              callback: data => data
+    getUser(){
+       return this.setState({
+           profile: {
+              response: damo.Api.get('http://localhost:8009/app/models/user.json'),
+              proccessData: res => res.data
            }
        });
     }
 }
 ```
 
-User模型类做了2个事情，通过`@initialState`描述了状态数据的初始化结构，`@dispatch`描述更改状态数据的方法调用。其中`@initialState`和`@dispatch`都是装饰器，装饰器是用来描述JS类以及其属性，使其按框架预设的逻辑来执行。
+数据模型是一类状态数据的集合，数据模型做2个事情，描述状态数据的初始化结构 以及 定义改变状态数据的行为方法。`this.setState` 更新状态数据。
 
-至于`BaseModel`类的`getQuery`方法，我们先理解为创建一个状态容器的询问语句，如果最终语句执行成功后，会变更状态容器中的指定数据。数据模型与状态管理的章节会详细介绍。
+静态属性`initialState` 描述了状态数据的初始化结构，这里值User下有一个状态数据，名为`profile` ; `displayName` 声明这个数据模型初始化后，存到全局的实例名称，比如你可以通过`damo.getModel('user')` 获取到这个User的实例。（那什么时候初始化呢，在调用`damo.model(User)` 时被初始化的，数据模型章节会详细介绍）。
 
-这一步以及往下看迷茫的话，可以结合概念关系图来理解下，学习基础概念参考[自述]()章节：
-
-![](/assets/import.png)
+> 同ReactComponent中的this.setState不同（定义一个真实数据），BaseModel中的this.setState定义的是获取真实数据的配置，以上代码表示通过一个接口的promise获取到数据，并更新profile状态数据。
 
 #### →获取状态数据
 
 在`app/scenes`目录下创建`selector.js`，并且编辑它。
 
 ```
-import {BaseSelector, Input} from 'damo-core'; 
-export default class Selector extends BaseSelector{
-    @Input() 
-    title(state){
-        return state.user.profile.name;
-    }
-    initialize(){
-        this.getModel('user').getUser();
-    }
+import damo from 'damo-core'; 
+export default class Selector extends damo.BaseSelector{
+    static dataBindings = ['user'];
+    static eventBindings = ['user'];
 }
 ```
 
-创建一个选择器`selector`，用来从状态容器中获取指定状态数据，以便后续通过数据绑定到视图。`@Input`描述获取到的指定状态数据处理过后，最终数据绑定到视图的数据结构，这样视图中通过`this.props`可以获取绑定的数据。
+创建一个选择器`selector`，用来从状态容器中获取指定状态数据，以便后续通过数据绑定到视图。
 
-当视图开始工作时，`Selector`的`initialize`钩子函数会自动执行，`initialize`中通过`BaseSelector`的`getModel`方法获取User实例，从而调用getUser方法获取用户名称，与此同时数据绑定到视图的数据结构也会重新更新，视图中this.props获取的数据是最新更新的数据，视图会重新的渲染。
+静态属性`dataBindings` 声明要注入哪个数据模型的状态数据，`eventBindings`声明了要注入哪个数据模型的行为方法。
+
+> 到目前为止这个Selector类还只是一个定义，如果不和组件绑定起来，起不到任何作用。和组件绑定后生成一个视图组件（通过`damo.view(selector, component)`），这样Selector从数据模型注入的状态数据和行为方法会传递给组件，最终组件内部通过this.props获取访问到。
 
 #### →数据绑定
 
@@ -163,48 +159,45 @@ export default class Selector extends BaseSelector{
 ```
 import React, {Component, PropTypes} from "react"; 
 import ReactDOM from 'react-dom';
-import {View} from 'damo-core';  
+import damo from 'damo-core';  
 import Selector from './selector';
 import './index.less';
-@View({
-    selector: Selector
-})
-export default class Root extends Component{
-    static routePath = '/';
+
+class Root extends Component{
     static defaultProps = {
-        title: 'My First React App!!'
+        profile: {
+            login: 'My First React App!!'
+        }
+    }
+    componentWillMount(){
+        // 因为damo.view绑定了Selector和组件，可以通过this.props.getUser访问从User注入的行为方法
+        this.props.getUser();
     }
     render(){
+        // 因为damo.view绑定了Selector和组件，可以通过this.props.profile访问从User注入的状态数据
         return (<div>
-            <h1>Welcome to {this.props.title}</h1>
+            <h1>Welcome to {this.props.profile.login}</h1>
             <img src="/brand.png" />
         </div>);
     }
 };
+// 绑定Selector和组件，生成视图
+export default damo.view(Selector, Root);
 ```
 
-可以看到Root组件定义部分并没有改动，只是添加了装饰器`@View`，通过`@View`，把视图相关的元数据`selector`，注入`Selector`类来达到把状态数据绑定到组件中。
+我们回顾一下以上内容，可以结合概念关系图来理解下，学习基础概念参考[自述]()章节：
 
-总结下出现了哪些新东西：
+![](/assets/simple.png)
 
-1. 引入`damo-core`模块
+概览图解释为：
 
-   * `BaseModel`数据模型基类，创建model需要继承BaseModel
+1. 前端应用创建时，同时会创建共享的单例对象，叫状态容器store。应用中几乎所有的状态数据都存在store。
+2. 数据模型model表示一类状态数据的集合，并且描述了这些数据状态的初始化结构，以及改变这些数据的方法。只有数据模型可以往store写入数据。
+3. 选择器selector相当于是组件的控制器，因为只有和组件绑定在一起才有意义。selector主要是从指定的数据模型实例中把状态数据和数据行为注入到组件，组件通过this.props可以访问到。
 
-   * `BaseSelector`,选择器基类，创建selector需要继承BaseSelector或者RxSelector（在状态与数据绑定章节详细讲解）
+把以上代码全部集中在一起再来理解下：
 
-   * `Api`，接口调用单例。
-
-   * 装饰器
-
-     * `@initialState`，描述初始化状态数据
-     * `@dispatch`，描述状态数据变更函数，使其函数调用时会自动更新数据到指定状态数据。
-     * `@Input`，描述数据绑定到视图的数据结构
-     * `@View`，描述视图需要的所有元数据，使视图按预定的程序工作。
-
-2. 概念：组件、数据模型、选择器和数据绑定。
-
-全部代码在一起：
+### 迷你App {#minapp}
 
 ```
 // app/models/user.json - 模拟接口数据
@@ -217,57 +210,38 @@ export default class Root extends Component{
 }
 */
 
-// app/models/user.js  - User数据模型，负责把数据写入到状态容器
-import {BaseModel, Api, initialState, dispatch} from 'damo-core'; 
+import damo from 'damo-core'; 
+import React, {Component, PropTypes} from "react"; 
+import ReactDOM from 'react-dom';
 
- export default class User extends BaseModel{
+// User数据模型 - 负责把数据写入到状态容器
+class User extends damo.BaseModel{
+    static displayName = 'user'
 
-    @initialState profile = {};
+    static initialState = {
+       profile: {}
+    }
 
-    @dispatch getUser(){
-       return this.getQuery({
-           response: Api.get('http://localhost:8009/app/models/user.json'),
-           proccessData: res => res.data,
-           change: {
-              name: 'profile',
-              callback: data => data
+    getUser(){
+       return this.setState({
+           profile: {
+              response: damo.Api.get('http://localhost:8009/app/models/user.json'),
+              proccessData: res => res.data
            }
        });
     }
 }
 
-// app/scenes/selector.js - 负责从状态容器中取数据，注入到组件
-import {BaseSelector, Input} from 'damo-core'; 
-export default class Selector extends BaseSelector{
-    @Input() 
-    title(state){
-        return state.user.profile.name;
-    }
-    initialize(){
-        this.getModel('user').getUser();
-    }
+// selector类 - 负责从状态容器中取数据，注入到组件
+class Selector extends BaseSelector{
+    static dataBindings = ['user'];
+    static eventBindings = ['user'];
+
 }
 
-// app/scenes/index.less - 组件样式
-/**
-h1 { 
-    color: #369; 
-    font-family: Arial, Helvetica, sans-serif; 
-    font-size: 250%; 
-}
-*/
 
-// app/scenes/index.jsx - 组件的代码定义，数据绑定的过程通过装饰器来实现：@View({selector: Selector})
-
-import React, {Component, PropTypes} from "react"; 
-import ReactDOM from 'react-dom';
-import {View} from 'damo-core';  
-import Selector from './selector';
-import './index.less';
-@View({
-    selector: Selector
-})
-export default class Root extends Component{
+// 组件的代码定义 - 数据绑定的过程通过damo.view
+class Root extends Component{
     static routePath = '/';
     static defaultProps = {
         title: 'My First React App!!'
@@ -279,81 +253,20 @@ export default class Root extends Component{
         </div>);
     }
 };
-```
 
-也许你还有疑惑，创建好的User是什么时机被应用的? 装饰器封装太绕，去装饰器如何实现？缺少路由？
+// 初始化
+damo.init();
+// 注册数据模型
+damo.model(User);
+// 生成视图组件
+const viewComponent = damo.view(Selector, Root);
+// 运行
+ReactDOM.render(viewComponent, document.body);
+```
 
 > 为了对应用代码有个概览认识，下面代码展示了一个小应用实现, 整个拷贝到app/app.jsx覆盖掉原有代码，想要深入理解每个部分可以学习教程章节。
 
-### 迷你App {#minapp}
-
-```
-import React, {Component, PropTypes} from "react";
-import ReactDOM from 'react-dom';
-import damo, {
-  BaseModel,
-  BaseSelector,
-  Api
-} from 'damo-core'; 
-
-// User数据模型，负责把数据写入到状态容器
-class User extends BaseModel {
-  static initialState = {
-    profile: {}
-  }
-
-  getUser() {
-    return this.getQuery({
-      response: Api.get('https://api.github.com/users/baqian'),
-      processData: res => res,
-      change: {
-        name: 'profile',
-        callback: data => data
-      }
-    })(this.dispatch);
-  }
-}
-
-// selector负责从状态容器中取数据，注入到组件
-class Selector extends BaseSelector {
-  static dataBindings = {
-    title: damo.toselect(User, 'profile.login')
-  }
-
-  initialize() {
-    this
-      .getModel(User)
-      .getUser();
-  }
-}
-
-// 组件的代码定义
-class Root extends Component {
-  static routePath = '/mini-app';
-
-  static defaultProps = {
-    title: 'My First React App!!'
-  }
-  render() {
-    return (
-      <div>
-        <h1>Welcome to {this.props.title}</h1>
-        <img src="/brand.png"/>
-      </div>
-    );
-  }
-};
-
-// app执行，关键的5个步骤
-
-damo.init(); // 初始化
-damo.model(User); // 添加数据模型
-const ViewComponent = damo.view(Selector, Root); // 给组件加入数据绑定
-damo.route('/demo', ViewComponent); // 建立路由
-damo.bootstrap(document.body); // 执行入口，根组件
-```
-
-### 3.0 回顾
+### 3.0 回顾 {#minapp}
 
 如你所愿，我们完成了这个“Hello, World”应用。
 

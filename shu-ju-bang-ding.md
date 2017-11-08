@@ -75,5 +75,11 @@ class Custom extends React.Component{
 
 选择器selector，从store读取数据，通过damo.view绑定选择器到组件。
 
+### 服务自动化
+
+```
+damo.autoLoadServices(require.context('./services', false, /\.js$/))
+```
+
 现在是否对damo有个清晰的认识了，赶紧去试下吧。
 

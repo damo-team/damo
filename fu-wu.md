@@ -108,7 +108,7 @@ class B {
         a: PropTypes.object.isRequired
     }
 }
-damo.view(Custom, {
+damo.service({
     user: User,
     a: A,
     b: B
@@ -144,9 +144,11 @@ class C{
 // 注册服务1：全局服务，displayName指定服务实例名称
 A.displayName = 'a';
 damo.service(A)
-// 注册服务2：全局服务，map的key指定服务名称
+// 注册服务2: 全局服务，指定实例名称
+damo.service('a', A)
+// 注册服务3：全局服务，map的key指定服务名称
 damo.service({b: B});
-// 注册服务3：全局服务，一次注册多个
+// 注册服务4：全局服务，一次注册多个
 C.displayName = 'c';
 damo.service([C]);
 
@@ -157,8 +159,9 @@ class Com extends React.Component{
         c: React.Proptypes.object.isRequired
     }
 }
-// 调用组件要注入服务，需要调用ComByServices组件，而不是Com组件。
+// 在生成视图时注入局部服务。
 const ComByServices = damo.view(Com, {c: C});
+ReactDOM.render(ComByServices, document.body);
 ```
 
 服务的操作比较灵活，代码中展示了服务的注册和服务的注入。
@@ -166,10 +169,11 @@ const ComByServices = damo.view(Com, {c: C});
 1. 3种服务创建方式
    1. 数组形式，需要显示声明依赖的服务实例名称，在数组最后一项是服务的函数定义，在服务调用时参数中会传入依赖的服务实例引用。
    2. 其他方式，需要通过静态属性contextTypes声明依赖的服务实例名称。
-2. 4种服务注册
+2. 5种服务注册
    1. map结构注册服务时，key为服务实例的名称。
-   2. 其他方式注册服务，需要通过服务的静态属性displayName来声明服务的实例名称。
-   3. 注册服务可以以数组形式注册多个。
+   2. 第一个参数为服务名称，第二个参数为服务类。
+   3. 其他方式注册服务，需要通过服务的静态属性displayName来声明服务的实例名称。
+   4. 注册服务可以以数组形式注册多个。
 
 ### 服务依赖和注入
 

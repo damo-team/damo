@@ -242,13 +242,19 @@ class Selector extends BaseSelector{
 
 // 组件的代码定义 - 数据绑定的过程通过damo.view
 class Root extends Component{
-    static routePath = '/';
     static defaultProps = {
-        title: 'My First React App!!'
+        profile: {
+            login: 'My First React App!!'
+        }
+    }
+    componentWillMount(){
+        // 因为damo.view绑定了Selector和组件，可以通过this.props.getUser访问从User注入的行为方法
+        this.props.getUser();
     }
     render(){
+        // 因为damo.view绑定了Selector和组件，可以通过this.props.profile访问从User注入的状态数据
         return (<div>
-            <h1>Welcome to {this.props.title}</h1>
+            <h1>Welcome to {this.props.profile.login}</h1>
             <img src="/brand.png" />
         </div>);
     }

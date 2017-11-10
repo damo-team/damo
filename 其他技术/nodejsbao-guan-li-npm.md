@@ -12,7 +12,7 @@ NPM的全称是Node Package Manager，是一个NodeJS包管理和分发工具，
 
 ### Node.js与npm以及cnpm的安装
 
-如果你的机器上还没有[**Node.js®和npm**](https://nodejs.org/en/download/)，请先下载安装它们。安装后在命令行中输入`npm -v`查看npm版本，推荐使用最新版本。确认npm安装成功后，全局安装cnpm工具
+如果你的机器上还没有[**Node.js®和npm**](https://nodejs.org/en/download/)，请先下载安装它们。安装后在命令行中输入`npm -v`查看npm版本，推荐使用最新版本。确认npm安装成功后，全局安装cnpm工具，如果是在内网安装，请使用公司提供的npm镜像地址代替taobao镜像地址
 
 ```
 npm config set registry https://registry.npm.taobao.org

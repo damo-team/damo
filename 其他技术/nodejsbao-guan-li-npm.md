@@ -1,6 +1,14 @@
-# Damo - CLI工具
+# NodeJS包管理与分发工具NPM
 
-暂不完善，简单使用基本够用。
+NPM的全称是Node Package Manager，是一个NodeJS包管理和分发工具，已经成为了非官方的发布Node模块（包）的标准。
+
+简单来讲，NPM就像是NodeJS世界里的软件管家，npm工具会根据你声明的依赖，通过一句`npm install`就都给您安装好。
+
+### CNPM
+
+然而因为种种你知道或者不知道的原因，npm无法正常的下载依赖包，这时推荐使用CNPM来替代NPM。你应该已经猜到了，CNPM就是国内和谐版的NPM，由taobao为您提供服务。cnpm的使用几乎和npm完全一致。
+
+Node.js与NPM的安装
 
 ```
 npm install -g damo-cli@latest

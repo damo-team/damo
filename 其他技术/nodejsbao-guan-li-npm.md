@@ -26,5 +26,7 @@ cnpm config set registry http://99.12.98.12:7001
 cnpm config set disturl http://99.12.98.12:7001/mirrors/node
 ```
 
+### 环境变量设置
 
+如果您使用的是windows，那么您还需要检查系统环境变量，并在环境变量Path中加入`C:\Program Files\nodejs\node_modules\`
 

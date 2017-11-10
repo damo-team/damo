@@ -8,7 +8,9 @@ NPM的全称是Node Package Manager，是一个NodeJS包管理和分发工具，
 
 然而因为种种你知道或者不知道的原因，npm无法正常的下载依赖包，这时推荐使用CNPM来替代NPM。你应该已经猜到了，CNPM就是国内和谐版的NPM，由taobao为您提供服务。cnpm的使用几乎和npm完全一致。
 
-Node.js与NPM的安装
+### Node.js与npm以及cnpm的安装
+
+如果你的机器上还没有[**Node.js®和npm**](https://nodejs.org/en/download/)，请先安装它们。
 
 ```
 npm install -g damo-cli@latest

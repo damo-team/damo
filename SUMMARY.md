@@ -20,8 +20,9 @@
   * [服务与注入](服务与注入.md)
   * 场景化开发
 * [其他技术](其他技术.md)
+  * [NodeJS包管理NPM](其他技术/nodejsbao-guan-li-npm.md)
+  * [状态容器Redux](其他技术/zhuang-tai-rong-qi-redux.md)
   * 组件框架React
-  * 状态容器Redux
   * 响应式编程RxJS
   * 基础组件库AntDesign
   * 国际化L20n

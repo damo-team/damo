@@ -10,7 +10,7 @@ NPM的全称是Node Package Manager，是一个NodeJS包管理和分发工具，
 
 ### Node.js与npm以及cnpm的安装
 
-如果你的机器上还没有[**Node.js®和npm**](https://nodejs.org/en/download/)，请先安装它们。
+如果你的机器上还没有[**Node.js®和npm**](https://nodejs.org/en/download/)，请先下载安装它们。
 
 ```
 npm install -g damo-cli@latest

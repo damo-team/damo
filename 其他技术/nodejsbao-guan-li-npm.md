@@ -22,13 +22,9 @@ npm install -g cnpm
 安装成功后，就可以使用cnpm命令来替代npm了。我们可以使用以下命令指定私有npm服务器地址
 
 ```
-npm config set registry http://99.12.98.12:7001
-npm config set disturl http://99.12.98.12:7001/mirrors/node
+cnpm config set registry http://99.12.98.12:7001
+cnpm config set disturl http://99.12.98.12:7001/mirrors/node
 ```
-
-
-
-
 
 
 

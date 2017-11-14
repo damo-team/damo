@@ -41,7 +41,16 @@ function hello(name){
 export.hello = hello;
 ```
 
+再新建文件b.js
 
+```
+var h = require('./a');
+h.hello('Giraffee');
+```
 
+在命令行下，进入service-test目录，输入`cnpm init `，之后依次输入项目名称，版本号等信息。注意项目名称要使用私有库指定的前缀：例如@scope-name/module-name，否则无法上传至私有库。在初始化项目后，会在目录下生成package.json。在项目目录下新建文件README.md，对项目进行解释说明，该内容会展示在cnpm的项目页中。
 
+使用cnpm账号登录命令`cnpm login`，输入由管理员提供的用户名和密码即可登录，首次登录时需要设置密码。登录后可以使用`cnpm whoami`，查询当前登录用户。
+
+使用`cnpm publish`命令，上传模块到cnpm私有库。
 

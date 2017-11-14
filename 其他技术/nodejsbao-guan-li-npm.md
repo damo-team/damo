@@ -30,3 +30,18 @@ cnpm config set disturl http://99.12.98.12:7001/mirrors/node
 
 如果您使用的是windows，那么您还需要检查系统环境变量，并在环境变量Path中加入`C:\Program Files\nodejs\node_modules\`
 
+### CNPM私有库的使用
+
+新建模块目录service-test，进入service-test目录下新建文件a.js
+
+```
+function hello(name){
+    console.log('hello '+name);
+}
+export.hello = hello;
+```
+
+
+
+
+

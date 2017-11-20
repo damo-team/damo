@@ -378,5 +378,75 @@ class Queue {
 }
 ```
 
+使用`extends`实现继承，因为这样更简单，不会有破坏`instanceof`运算的危险。
 
+```
+// bad
+const inherits = require('inherits');
+function PeekableQueue(contents) {
+  Queue.apply(this, contents);
+}
+inherits(PeekableQueue, Queue);
+PeekableQueue.prototype.peek = function() {
+  return this._queue[0];
+}
 
+// good
+class PeekableQueue extends Queue {
+  peek() {
+    return this._queue[0];
+  }
+}
+```
+
+## 9.模块
+
+首先，Module 语法是 JavaScript 模块的标准写法，坚持使用这种写法。使用`import`取代`require`。
+
+```
+// bad
+const moduleA = require('moduleA');
+const func1 = moduleA.func1;
+const func2 = moduleA.func2;
+
+// good
+import { func1, func2 } from 'moduleA';
+```
+
+使用`export`取代`module.exports`。
+
+```
+// commonJS的写法
+var React = require('react');
+
+var Breadcrumbs = React.createClass({
+  render() {
+    return <nav />;
+  }
+});
+
+module.exports = Breadcrumbs;
+
+// ES6的写法
+import React from 'react';
+
+class Breadcrumbs extends React.Component {
+  render() {
+    return <nav />;
+  }
+};
+
+export default Breadcrumbs;
+```
+
+如果模块只有一个输出值，就使用`export default`，如果模块有多个输出值，就不使用`export default`，`export default`与普通的export不要同时使用。
+
+不要在模块输入中使用通配符。因为这样可以确保你的模块之中，有一个默认输出（export default）。
+
+```
+// bad
+import * as myObject from './importModule';
+
+// good
+import myObject from './importModule';
+```

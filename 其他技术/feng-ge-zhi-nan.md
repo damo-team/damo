@@ -117,6 +117,22 @@ function getFullName({ firstName, lastName }) {
 ```
 
 
+如果函数返回多个值，优先使用对象的解构赋值，而不是数组的解构赋值。这样便于以后添加返回值，以及更改返回值的顺序。
 
+```
+// bad
+function processInput(input) {
+  return [left, right, top, bottom];
+}
+
+// good
+function processInput(input) {
+  return { left, right, top, bottom };
+}
+
+const { left, right } = processInput(input);
+```
+
+## 4.对象
 
 

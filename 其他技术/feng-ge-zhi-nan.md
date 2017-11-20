@@ -350,8 +350,33 @@ for (let item of map.entries()) {
 }
 ```
 
+## 8.Class
 
+总是用 Class，取代需要 prototype 的操作。因为 Class 的写法更简洁，更易于理解。
 
+```
+// bad
+function Queue(contents = []) {
+  this._queue = [...contents];
+}
+Queue.prototype.pop = function() {
+  const value = this._queue[0];
+  this._queue.splice(0, 1);
+  return value;
+}
+
+// good
+class Queue {
+  constructor(contents = []) {
+    this._queue = [...contents];
+  }
+  pop() {
+    const value = this._queue[0];
+    this._queue.splice(0, 1);
+    return value;
+  }
+}
+```
 
 
 

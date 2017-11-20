@@ -217,6 +217,51 @@ const atom = {
 };
 ```
 
+## 5.数组
+
+使用扩展运算符（...）拷贝数组。
+
+```
+// bad
+const len = items.length;
+const itemsCopy = [];
+let i;
+
+for (i = 0; i < len; i++) {
+  itemsCopy[i] = items[i];
+}
+
+// good
+const itemsCopy = [...items];
+```
+
+使用 Array.from 方法，将类似数组的对象转为数组。
+
+```
+const foo = document.querySelectorAll('.foo');
+const nodes = Array.from(foo);
+```
+
+
+## 6.函数
+
+立即执行函数可以写成箭头函数的形式。
+
+```
+(() => {
+  console.log('Welcome to the Internet.');
+})();
+```
+
+那些需要使用函数表达式的场合，尽量用箭头函数代替。因为这样更简洁，而且绑定了 this。
+
+```
+```
+
+
+
+
+
 
 
 

@@ -450,3 +450,36 @@ import * as myObject from './importModule';
 // good
 import myObject from './importModule';
 ```
+
+如果模块默认输出一个函数，函数名的首字母应该小写。
+
+```
+function makeStyleGuide() {
+}
+
+export default makeStyleGuide;
+```
+
+如果模块默认输出一个对象，对象名的首字母应该大写。
+
+```
+const StyleGuide = {
+  es6: {
+  }
+};
+
+export default StyleGuide;
+```
+
+
+
+
+
+
+
+
+
+
+
+
+

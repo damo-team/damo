@@ -317,7 +317,17 @@ function concatenateAll(...args) {
 
 使用默认值语法设置函数参数的默认值。
 
+```
+// bad
+function handleThings(opts) {
+  opts = opts || {};
+}
 
+// good
+function handleThings(opts = {}) {
+  // ...
+}
+```
 
 
 

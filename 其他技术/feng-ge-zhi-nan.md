@@ -45,3 +45,78 @@ if (true) {
 
 `const`优于`let`有几个原因。一个是`const`可以提醒阅读程序的人，这个变量不应该改变；另一个是`const`比较符合函数式编程思想，运算不改变值，只是新建值，而且这样也有利于将来的分布式运算；最后一个原因是 JavaScript 编译器会对`const`进行优化，所以多使用`const`，有利于提供程序的运行效率，也就是说`let`和`const`的本质区别，其实是编译器内部的处理不同。
 
+```
+// bad
+var a = 1, b = 2, c = 3;
+
+// good
+const a = 1;
+const b = 2;
+const c = 3;
+
+// best
+const [a, b, c] = [1, 2, 3];
+```
+
+`const`声明常量还有两个好处，一是阅读代码的人立刻会意识到不应该修改这个值，二是防止了无意间修改变量值所导致的错误。
+
+所有的函数都应该设置为常量。
+
+长远来看，JavaScript 可能会有多线程的实现（比如 Intel 公司的 River Trail 那一类的项目），这时`let`表示的变量，只应出现在单线程运行的代码中，不能是多线程共享的，这样有利于保证线程安全。
+
+## 2.字符串
+
+静态字符串一律使用单引号或反引号，不使用双引号。动态字符串使用反引号。
+
+```
+// bad
+const a = "foobar";
+const b = 'foo' + a + 'bar';
+
+// acceptable
+const c = `foobar`;
+
+// good
+const a = 'foobar';
+const b = `foo${a}bar`;
+const c = 'foobar';
+```
+
+## 3.解构赋值
+
+使用数组成员对变量赋值时，优先使用解构赋值。
+
+```
+const arr = [1, 2, 3, 4];
+
+// bad
+const first = arr[0];
+const second = arr[1];
+
+// good
+const [first, second] = arr;
+```
+
+函数的参数如果是对象的成员，优先使用解构赋值。
+
+```
+// bad
+function getFullName(user) {
+  const firstName = user.firstName;
+  const lastName = user.lastName;
+}
+
+// good
+function getFullName(obj) {
+  const { firstName, lastName } = obj;
+}
+
+// best
+function getFullName({ firstName, lastName }) {
+}
+```
+
+
+
+
+

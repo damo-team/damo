@@ -256,7 +256,44 @@ const nodes = Array.from(foo);
 那些需要使用函数表达式的场合，尽量用箭头函数代替。因为这样更简洁，而且绑定了 this。
 
 ```
+// bad
+[1, 2, 3].map(function (x) {
+  return x * x;
+});
+
+// good
+[1, 2, 3].map((x) => {
+  return x * x;
+});
+
+// best
+[1, 2, 3].map(x => x * x);
 ```
+
+箭头函数取代`Function.prototype.bind`，不应再用 self/_this/that 绑定 this。
+
+```
+// bad
+const self = this;
+const boundMethod = function(...params) {
+  return method.apply(self, params);
+}
+
+// acceptable
+const boundMethod = method.bind(this);
+
+// best
+const boundMethod = (...params) => method.apply(this, params);
+```
+
+
+
+
+
+
+
+
+
 
 
 

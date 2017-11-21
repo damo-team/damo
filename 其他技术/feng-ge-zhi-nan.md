@@ -10,7 +10,7 @@
 
 ES6 提出了两个新的声明变量的命令：`let`和`const`。其中，`let`完全可以取代`var`，因为两者语义相同，而且`let`没有副作用。
 
-```
+```javascript
 'use strict';
 
 if (true) {
@@ -26,7 +26,7 @@ for (let i = 0; i < 10; i++) {
 
 `var`命令存在变量提升效用，`let`命令没有这个问题。
 
-```
+```javascript
 'use strict';
 
 if (true) {
@@ -45,7 +45,7 @@ if (true) {
 
 `const`优于`let`有几个原因。一个是`const`可以提醒阅读程序的人，这个变量不应该改变；另一个是`const`比较符合函数式编程思想，运算不改变值，只是新建值，而且这样也有利于将来的分布式运算；最后一个原因是 JavaScript 编译器会对`const`进行优化，所以多使用`const`，有利于提供程序的运行效率，也就是说`let`和`const`的本质区别，其实是编译器内部的处理不同。
 
-```
+```javascript
 // bad
 var a = 1, b = 2, c = 3;
 
@@ -68,7 +68,7 @@ const [a, b, c] = [1, 2, 3];
 
 静态字符串一律使用单引号或反引号，不使用双引号。动态字符串使用反引号。
 
-```
+```javascript
 // bad
 const a = "foobar";
 const b = 'foo' + a + 'bar';
@@ -86,7 +86,7 @@ const c = 'foobar';
 
 使用数组成员对变量赋值时，优先使用解构赋值。
 
-```
+```javascript
 const arr = [1, 2, 3, 4];
 
 // bad
@@ -99,7 +99,7 @@ const [first, second] = arr;
 
 函数的参数如果是对象的成员，优先使用解构赋值。
 
-```
+```javascript
 // bad
 function getFullName(user) {
   const firstName = user.firstName;
@@ -119,7 +119,7 @@ function getFullName({ firstName, lastName }) {
 
 如果函数返回多个值，优先使用对象的解构赋值，而不是数组的解构赋值。这样便于以后添加返回值，以及更改返回值的顺序。
 
-```
+```javascript
 // bad
 function processInput(input) {
   return [left, right, top, bottom];
@@ -137,7 +137,7 @@ const { left, right } = processInput(input);
 
 单行定义的对象，最后一个成员不以逗号结尾。多行定义的对象，最后一个成员以逗号结尾。
 
-```
+```javascript
 // bad
 const a = { k1: v1, k2: v2, };
 const b = {
@@ -155,7 +155,7 @@ const b = {
 
 对象尽量静态化，一旦定义，就不得随意添加新的属性。如果添加属性不可避免，要使用`Object.assign`方法。
 
-```
+```javascript
 // bad
 const a = {};
 a.x = 3;
@@ -171,7 +171,7 @@ a.x = 3;
 
 如果对象的属性名是动态的，可以在创造对象的时候，使用属性表达式定义。
 
-```
+```javascript
 // bad
 const obj = {
   id: 5,
@@ -191,7 +191,7 @@ const obj = {
 
 另外，对象的属性和方法，尽量采用简洁表达法，这样易于描述和书写。
 
-```
+```javascript
 var ref = 'some value';
 
 // bad
@@ -221,7 +221,7 @@ const atom = {
 
 使用扩展运算符（...）拷贝数组。
 
-```
+```javascript
 // bad
 const len = items.length;
 const itemsCopy = [];
@@ -237,7 +237,7 @@ const itemsCopy = [...items];
 
 使用 Array.from 方法，将类似数组的对象转为数组。
 
-```
+```javascript
 const foo = document.querySelectorAll('.foo');
 const nodes = Array.from(foo);
 ```
@@ -247,7 +247,7 @@ const nodes = Array.from(foo);
 
 立即执行函数可以写成箭头函数的形式。
 
-```
+```javascript
 (() => {
   console.log('Welcome to the Internet.');
 })();
@@ -255,7 +255,7 @@ const nodes = Array.from(foo);
 
 那些需要使用函数表达式的场合，尽量用箭头函数代替。因为这样更简洁，而且绑定了 this。
 
-```
+```javascript
 // bad
 [1, 2, 3].map(function (x) {
   return x * x;
@@ -272,7 +272,7 @@ const nodes = Array.from(foo);
 
 箭头函数取代`Function.prototype.bind`，不应再用 self/_this/that 绑定 this。
 
-```
+```javascript
 // bad
 const self = this;
 const boundMethod = function(...params) {
@@ -290,7 +290,7 @@ const boundMethod = (...params) => method.apply(this, params);
 
 所有配置项都应该集中在一个对象，放在最后一个参数，布尔值不可以直接作为参数。
 
-```
+```javascript
 // bad
 function divide(a, b, option = false ) {
 }
@@ -302,7 +302,7 @@ function divide(a, b, { option = false } = {}) {
 
 不要在函数体内使用 arguments 变量，使用 rest 运算符（...）代替。因为 rest 运算符显式表明你想要获取参数，而且 arguments 是一个类似数组的对象，而 rest 运算符可以提供一个真正的数组。
 
-```
+```javascript
 // bad
 function concatenateAll() {
   const args = Array.prototype.slice.call(arguments);
@@ -317,7 +317,7 @@ function concatenateAll(...args) {
 
 使用默认值语法设置函数参数的默认值。
 
-```
+```javascript
 // bad
 function handleThings(opts) {
   opts = opts || {};
@@ -333,8 +333,7 @@ function handleThings(opts = {}) {
 
 注意区分 Object 和 Map，只有模拟现实世界的实体对象时，才使用 Object。如果只是需要`key: value`的数据结构，使用 Map 结构。因为 Map 有内建的遍历机制。
 
-```
-
+```javascript
 let map = new Map(arr);
 
 for (let key of map.keys()) {
@@ -354,7 +353,7 @@ for (let item of map.entries()) {
 
 总是用 Class，取代需要 prototype 的操作。因为 Class 的写法更简洁，更易于理解。
 
-```
+```javascript
 // bad
 function Queue(contents = []) {
   this._queue = [...contents];
@@ -380,7 +379,7 @@ class Queue {
 
 使用`extends`实现继承，因为这样更简单，不会有破坏`instanceof`运算的危险。
 
-```
+```javascript
 // bad
 const inherits = require('inherits');
 function PeekableQueue(contents) {
@@ -403,7 +402,7 @@ class PeekableQueue extends Queue {
 
 首先，Module 语法是 JavaScript 模块的标准写法，坚持使用这种写法。使用`import`取代`require`。
 
-```
+```javascript
 // bad
 const moduleA = require('moduleA');
 const func1 = moduleA.func1;
@@ -415,7 +414,7 @@ import { func1, func2 } from 'moduleA';
 
 使用`export`取代`module.exports`。
 
-```
+```javascript
 // commonJS的写法
 var React = require('react');
 
@@ -443,7 +442,7 @@ export default Breadcrumbs;
 
 不要在模块输入中使用通配符。因为这样可以确保你的模块之中，有一个默认输出（export default）。
 
-```
+```javascript
 // bad
 import * as myObject from './importModule';
 
@@ -453,7 +452,7 @@ import myObject from './importModule';
 
 如果模块默认输出一个函数，函数名的首字母应该小写。
 
-```
+```javascript
 function makeStyleGuide() {
 }
 
@@ -462,7 +461,7 @@ export default makeStyleGuide;
 
 如果模块默认输出一个对象，对象名的首字母应该大写。
 
-```
+```javascript
 const StyleGuide = {
   es6: {
   }
@@ -472,7 +471,137 @@ export default StyleGuide;
 ```
 
 
+## 10.命名规则
 
+避免单字母命名。命名应具备描述性。
+
+```javascript
+// bad
+function q() {
+  // ...stuff...
+}
+
+// good
+function query() {
+  // ..stuff..
+}
+```
+
+使用驼峰式命名对象、函数和实例。
+
+```javascript
+// bad
+const OBJEcttsssss = {};
+const this_is_my_object = {};
+function c() {}
+
+// good
+const thisIsMyObject = {};
+function thisIsMyFunction() {}
+```
+
+使用帕斯卡式命名构造函数或类。
+
+```javascript
+// bad
+function user(options) {
+  this.name = options.name;
+}
+
+const bad = new user({
+  name: 'nope',
+});
+
+// good
+class User {
+  constructor(options) {
+    this.name = options.name;
+  }
+}
+
+const good = new User({
+  name: 'yup',
+});
+```
+
+不要使用下划线 `_` 结尾或开头来命名属性和方法。
+
+```javascript
+// bad
+this.__firstName__ = 'Panda';
+this.firstName_ = 'Panda';
+this._firstName = 'Panda';
+
+// good
+this.firstName = 'Panda';
+```
+
+别保存 `this` 的引用。使用箭头函数或 Function#bind。
+
+```javascript
+// bad
+function foo() {
+  const self = this;
+  return function() {
+    console.log(self);
+  };
+}
+
+// bad
+function foo() {
+  const that = this;
+  return function() {
+    console.log(that);
+  };
+}
+
+// good
+function foo() {
+  return () => {
+    console.log(this);
+  };
+}
+```
+
+如果你的文件只输出一个类，那你的文件名必须和类名完全保持一致。
+
+```javascript
+// file contents
+class CheckBox {
+  // ...
+}
+export default CheckBox;
+
+// in some other file
+// bad
+import CheckBox from './checkBox';
+
+// bad
+import CheckBox from './check_box';
+
+// good
+import CheckBox from './CheckBox';
+```
+
+当你导出默认的函数时使用驼峰式命名。你的文件名必须和函数名完全保持一致。
+
+```javascript
+function makeStyleGuide() {
+}
+
+export default makeStyleGuide;
+```
+
+当你导出单例、函数库、空对象时使用帕斯卡式命名。
+
+```javascript
+const AirbnbStyleGuide = {
+  es6: {
+  }
+};
+
+export default AirbnbStyleGuide;
+```
 
 
 
